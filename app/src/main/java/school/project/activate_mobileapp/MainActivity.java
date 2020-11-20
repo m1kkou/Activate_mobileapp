@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     TextView eka;
     DataSnapshot snapshot1;
     Button btn1;
+    CheckBox checkBox;
+    String tuloste = "";
     ArrayList<Aktiviteetti> aktiviteettilista = new ArrayList<>();
 
     @Override
@@ -34,16 +37,24 @@ public class MainActivity extends AppCompatActivity {
         testiDatabase = FirebaseDatabase.getInstance().getReference();
         eka = findViewById(R.id.tekstiboksi);
         btn1 = findViewById(R.id.button1);
+        checkBox = findViewById(R.id.checkBox1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("tiedot", "klikattu!");
+                Log.d("tiedot", "klikattu");
                 getData(snapshot1);
-                String tuloste = "";
                 for (Aktiviteetti a : aktiviteettilista){
-                    tuloste = tuloste + a.tiedot.Nimi+ " " + a.tiedot.puhnro + "\n";
+                    if(checkBox.isChecked()){
+                        if(a.varaus == 1){
+                            tuloste = tuloste + a.tiedot.Nimi + " " + a.tiedot.puhnro + "\n";
+                        }
+                    }
+                    else {
+                        tuloste = tuloste + a.tiedot.Nimi + " " + a.tiedot.puhnro + "\n";
+                    }
                 }
                 eka.setText(tuloste);
+                tuloste = "";
             }
         });
     }
@@ -67,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData(DataSnapshot dataSnapshot){
+        aktiviteettilista.clear();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
             Log.d("tiedot", ds.getKey());
             String avain = ds.getKey();
