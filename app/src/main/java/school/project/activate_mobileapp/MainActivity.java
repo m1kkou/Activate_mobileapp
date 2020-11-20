@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         testiDatabase = FirebaseDatabase.getInstance().getReference();
+        //muuttuja, johon tallennetaan paikallinen instanssiviite tietokantaan
         eka = findViewById(R.id.tekstiboksi);
         btn1 = findViewById(R.id.button1);
         checkBox = findViewById(R.id.checkBox1);
@@ -43,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("tiedot", "klikattu");
                 getData(snapshot1);
+                //getData-metodi ottaa onStartissa tehdyn snapshotin, ja tallentaa sieltä aktiviteetit luokkina (aktiviteettilistaan)
                 for (Aktiviteetti a : aktiviteettilista){
                     if(checkBox.isChecked()){
-                        if(a.varaus == 1){
+                        if(a.varaus == 0){
                             tuloste = tuloste + a.tiedot.Nimi + " " + a.tiedot.puhnro + "\n";
                         }
                     }
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d("tiedot", "toimiiko?");
                 snapshot1 = snapshot;
+                // snapshot kopioidaan paikalliseen muuttujaan, jota voidaan käyttää getData-metodissa myöhemmin
             }
 
             @Override
@@ -79,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData(DataSnapshot dataSnapshot){
         aktiviteettilista.clear();
+        // lista tyhjäksi ettei joka painikkeen klikkauksella tule kopio koko tietokannasta
         for(DataSnapshot ds : dataSnapshot.getChildren()){
             Log.d("tiedot", ds.getKey());
             String avain = ds.getKey();
             aktiviteettilista.add(ds.getValue(Aktiviteetti.class));
+            // Lisätään jokainen aktiviteetti listaan Aktiviteetti-luokkana, log alla virheiden löytämiseksi
             Log.d("tiedot_varaus", ds.child("varaus").getValue().toString());
             Log.d("tiedot_tyyppi", ds.child("aktiviteetin_tyyppi").getValue().toString());
             Log.d("tiedot_yhteyst", ds.child("tiedot").getValue().toString());
