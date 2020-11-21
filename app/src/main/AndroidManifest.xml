@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HakuValikko" />
+        <activity android:name=".SearchMenu" />
+        <activity android:name=".SearchResultMenu" />
+        <activity android:name=".OrderView" />
     </application>
 
 </manifest>

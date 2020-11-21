@@ -7,14 +7,15 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class HakuValikko extends AppCompatActivity implements View.OnClickListener {
+public class SearchMenu extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hakuvalikko);
+        setContentView(R.layout.searchmenu);
 
         findViewById(R.id.button).setOnClickListener(this);
+        //findViewById(R.id.button2).setOnClickListener(this);
     }
 
     public void onClick(View view) {
@@ -23,9 +24,10 @@ public class HakuValikko extends AppCompatActivity implements View.OnClickListen
         if (view instanceof Button) {
             button = (Button) view;
             if (button.getId() == R.id.button) {
-                Intent intent = new Intent(this, HakutulosValikko.class);
+                Intent intent = new Intent(this, SearchResultMenu.class);
                 startActivity(intent);
             }
+
         }
     }
 }
