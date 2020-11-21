@@ -8,6 +8,10 @@ class BaseClasses {
     class Activities {
         private ArrayList<Activity> activities;
 
+        public void addActivity(Activity a){
+            activities.add(a);
+        }
+
 
         /*GetActivities (Activities) {
         Tähän Joona vähän tietokantataikoja joilla palautetaan lista kaikista aktiviteeteista
@@ -16,7 +20,7 @@ class BaseClasses {
          */
     }
 
-    class Activity {
+    static class Activity {
         private String name;
         private ContactInformation contactInformation;
         private String description; //Tästä voisi tehdä apuluokan
@@ -28,9 +32,10 @@ class BaseClasses {
         private AvailableTimes availableTimes;
         private String ActivityID; //tunniste tietokantaa varten
 
-        public Activity(String activityID, String name, String imageURL, int activityTypeEnum, int isAvailable, double price ){
+        public Activity(String activityID, String name, String description, String imageURL, int activityTypeEnum, int isAvailable, double price ){
             this.ActivityID = activityID;
             this.name = name;
+            this.description = description;
             this.imageURL = imageURL;
             this.activityTypeEnum = activityTypeEnum;
             this.isAvailable = isAvailable;
@@ -51,6 +56,18 @@ class BaseClasses {
                 return "Hyvinvointi";
             }
             return "undefined";
+        }
+        public String getImageURL(){
+            return this.imageURL;
+        }
+        public String getName(){
+            return this.name;
+        }
+        public String getDescription(){
+            return this.description;
+        }
+        public String getPrice(){
+            return String.valueOf(this.price);
         }
     }
 
