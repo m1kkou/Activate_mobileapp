@@ -96,7 +96,7 @@ class BaseClasses {
             Activity activity = new Activity();
             int len = activities.size();
             for (int i=0; i<len ; i++){
-                if(activities.get(i).ActivityID == ActivityID){
+                if(activities.get(i).ActivityID.equals(ActivityID)){
                     activity = activities.get(i);
                 }
                 //loopataan läpi activities-lista ja napataan se jossa oikea id
@@ -112,6 +112,12 @@ class BaseClasses {
 
             return ArrayList<Time>;
         }
+
+        En oo varma toimiiko ylläoleva koodi, toivottavasti :D
+        Mietin vaan, missä tilanteessa tarvitaan metodia joka ottaa activity-id:n ja näyttää tuon time-listan?
+        Esim. jos käyttäjä valitsee aktiviteetin josta sitten aikoja näytetään, niin siinä vaiheessahan ollaan jo
+        Activity valittu ja voidaan näyttää time-luokan sisältöä siinä missä muutakin Activity-luokan tietoja.
+
 
          */
     }
