@@ -1,21 +1,31 @@
 package school.project.activate_mobileapp;
-import android.app.Activity;
+
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class BaseClasses {
+    public ArrayList<Activity> activities = new ArrayList<>();
 
     class Activities {
-        private ArrayList<Activity> activities;
 
         public void addActivity(Activity a){
             activities.add(a);
         }
+        private MainActivity mainActivity;
 
+        public ArrayList<Activity>  GetActivities(){
+            mainActivity = new MainActivity();
+            activities = mainActivity.getActivitylist();
+            return activities;
+        }
 
-        /*GetActivities (Activities) {
+      /*  GetActivities (Activities) {
         Tähän Joona vähän tietokantataikoja joilla palautetaan lista kaikista aktiviteeteista
         return activities
+
+        Tarviiko tuon metodin ottaa argumenttia, jos sen tarkoitus palauttaa kaikki aktiviteetit joka tapauksessa?
         }
          */
     }
@@ -31,6 +41,10 @@ class BaseClasses {
         private String activityType;
         private AvailableTimes availableTimes;
         private String ActivityID; //tunniste tietokantaa varten
+
+        public Activity(){
+            //no-argument constructor for getData() at MainActivity
+        }
 
         public Activity(String activityID, String name, String description, String imageURL, int activityTypeEnum, int isAvailable, double price ){
             this.ActivityID = activityID;
@@ -73,7 +87,20 @@ class BaseClasses {
 
     class AvailableTimes {
         private ArrayList<Time> times;
-
+        public ArrayList<Time> getReservations(String ActivityID){
+            Activity activity = new Activity();
+            int len = activities.size();
+            for (int i=0; i<len ; i++){
+                if(activities.get(i).ActivityID == ActivityID){
+                    activity = activities.get(i);
+                }
+                //loopataan läpi activities-lista ja napataan se jossa oikea id
+            }
+            for(Time t : activity.availableTimes.times){
+                times.add(t);
+            }
+            return times;
+        }
         /* Joona tänne tarvisi vähän taikoja kanssa, että saadaan kannasta haettua lista ajoista eli Time olioista:
         public ArrayList<Time> getReservations(String ActivityID){
         Haetaan ID:n mukaisen aktiviteetin aika -oliot.
