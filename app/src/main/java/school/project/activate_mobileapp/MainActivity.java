@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.telephony.IccOpenLogicalChannelResponse;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +24,15 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference testiDatabase;
+    //databasereferenceä tarvitaan, jotta voidaan lukea tai kirjoittaa firebaseen
     TextView eka;
     DataSnapshot snapshot1;
+    //data firebasesta saadaan aina datasnapshot-objektina
     Button btn1;
     CheckBox checkBox;
     String tuloste = "";
-    ArrayList<Aktiviteetti> aktiviteettilista = new ArrayList<>();
+    ArrayList<Activity> aktiviteettilista = new ArrayList<>();
+    // aktiviteettilistan tallennetaan Aktiviteetti-objekteja
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +49,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("tiedot", "klikattu");
                 getData(snapshot1);
                 //getData-metodi ottaa onStartissa tehdyn snapshotin, ja tallentaa sieltä aktiviteetit luokkina (aktiviteettilistaan)
-                for (Aktiviteetti a : aktiviteettilista){
-                    if(checkBox.isChecked()){
-                        if(a.varaus == 0){
-                            tuloste = tuloste + a.tiedot.Nimi + " " + a.tiedot.puhnro + "\n";
-                        }
-                    }
-                    else {
-                        tuloste = tuloste + a.tiedot.Nimi + " " + a.tiedot.puhnro + "\n";
-                    }
+                for (Activity a : aktiviteettilista){
+                            // Tässä voitaisiin myös poistaa halutut aktiviteetit, esim aktiviteettilista.remove(a);
+                            // ja filtteröidystä aktiviteettilistasta ottaa aktiviteetti-objektit ja näyttää ne halutulla tavalla näytöllä.
+                        tuloste = tuloste + a.getName() + " " + a.getDescription() +"\n";
                 }
                 eka.setText(tuloste);
                 tuloste = "";
@@ -82,15 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData(DataSnapshot dataSnapshot){
         aktiviteettilista.clear();
-        // lista tyhjäksi ettei joka painikkeen klikkauksella tule kopio koko tietokannasta
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            Log.d("tiedot", ds.getKey());
-            String avain = ds.getKey();
-            aktiviteettilista.add(ds.getValue(Aktiviteetti.class));
-            // Lisätään jokainen aktiviteetti listaan Aktiviteetti-luokkana, log alla virheiden löytämiseksi
-            Log.d("tiedot_varaus", ds.child("varaus").getValue().toString());
-            Log.d("tiedot_tyyppi", ds.child("aktiviteetin_tyyppi").getValue().toString());
-            Log.d("tiedot_yhteyst", ds.child("tiedot").getValue().toString());
+        DataSnapshot aktiviteetit = dataSnapshot.child("Activities");
+        for(DataSnapshot ds : aktiviteetit.getChildren()){
+            aktiviteettilista.add(ds.getValue(Activity.class));
         }
     }
 }
