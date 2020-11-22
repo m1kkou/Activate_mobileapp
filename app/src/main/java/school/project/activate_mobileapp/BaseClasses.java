@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 class BaseClasses {
-    public ArrayList<Activity> activities = new ArrayList<>();
+    private MainActivity mainActivity;
+    public ArrayList<Activity> activities = mainActivity.getActivitylist();
 
     class Activities {
 
-        public void addActivity(Activity a){
+       /* public void addActivity(Activity a){
             activities.add(a);
         }
         private MainActivity mainActivity;
@@ -21,11 +22,15 @@ class BaseClasses {
             return activities;
         }
 
-      /*  GetActivities (Activities) {
+        GetActivities (Activities) {
         Tähän Joona vähän tietokantataikoja joilla palautetaan lista kaikista aktiviteeteista
         return activities
 
         Tarviiko tuon metodin ottaa argumenttia, jos sen tarkoitus palauttaa kaikki aktiviteetit joka tapauksessa?
+        Onko em. metodit tarpeellisia yleensäkään (addActivity?), eihän tuonne listaan tarvi lisätä uusia aktiviteettei apin kautta?
+        tuon ArrayList activitiesin vois vaan alussa määritellä activities = mainActivity.getActivitylist();
+        Halutessa tietyn aktiviteetin ulos sieltä, voi käyttää esim. activities.get(i), ja esim aktiviteettinäkymään
+        loopata noita läpi halutuin filtterein yksinkertaisella for, if -rakenteella
         }
          */
     }
@@ -107,6 +112,7 @@ class BaseClasses {
 
             return ArrayList<Time>;
         }
+
          */
     }
     class Time {
