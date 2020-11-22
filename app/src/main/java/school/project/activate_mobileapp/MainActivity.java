@@ -1,6 +1,7 @@
 package school.project.activate_mobileapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -21,8 +22,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference databaseReference;
     public DataSnapshot dataSnapshot;
-    public ArrayList<BaseClasses.Activity> activitylist = new ArrayList<>();
-
+    public static ArrayList<BaseClasses.Activity> activitylist = new ArrayList<>();
     public ArrayList<BaseClasses.Activity> getActivitylist() {
         return activitylist;
     }
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             activitylist.add(ds.getValue(BaseClasses.Activity.class));
         }
         Log.d("test", activitylist.get(0).toString());
+        Log.d("test", getActivitylist().toString());
     }
 }
 

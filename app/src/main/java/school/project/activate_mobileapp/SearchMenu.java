@@ -24,7 +24,7 @@ public class SearchMenu extends AppCompatActivity implements View.OnClickListene
         if (view instanceof Button) {
             button = (Button) view;
             if (button.getId() == R.id.button) {
-                Intent intent = new Intent(this, SearchResultMenu.class);
+                Intent intent = new Intent(this, SearchResults.class);
                 startActivity(intent);
             }
 
