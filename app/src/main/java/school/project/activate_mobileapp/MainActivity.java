@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             activitylist.add(ds.getValue(BaseClasses.Activity.class));
         }
         Log.d("test", activitylist.get(0).toString());
-        Log.d("test", getActivitylist().toString());
+        Log.d("test", activitylist.get(0).getName());
     }
 }
 

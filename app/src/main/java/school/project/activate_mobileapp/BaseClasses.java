@@ -6,37 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 class BaseClasses {
-    private MainActivity mainActivity;
-    public ArrayList<Activity> activities = mainActivity.getActivitylist();
+    public static ArrayList<Activity> activities = MainActivity.activitylist;
 
     class Activities {
 
        /* public void addActivity(Activity a){
             activities.add(a);
         }
-        private MainActivity mainActivity;
-
-        public ArrayList<Activity>  GetActivities(){
-            mainActivity = new MainActivity();
-            activities = mainActivity.getActivitylist();
-            return activities;
-        }
 
         GetActivities (Activities) {
         Tähän Joona vähän tietokantataikoja joilla palautetaan lista kaikista aktiviteeteista
         return activities
 
-        Tarviiko tuon metodin ottaa argumenttia, jos sen tarkoitus palauttaa kaikki aktiviteetit joka tapauksessa?
-        Onko em. metodit tarpeellisia yleensäkään (addActivity?), eihän tuonne listaan tarvi lisätä uusia aktiviteettei apin kautta?
-        tuon ArrayList activitiesin vois vaan alussa määritellä activities = mainActivity.getActivitylist();
-        Halutessa tietyn aktiviteetin ulos sieltä, voi käyttää esim. activities.get(i), ja esim aktiviteettinäkymään
-        loopata noita läpi halutuin filtterein yksinkertaisella for, if -rakenteella
-        }
+        Näin? Vai pitääkö tuohon saada argumentti sisään jotenkin? -j
          */
+       public ArrayList GetActivities(){
+           return activities;
+       }
     }
 
     static class Activity {
-        private String name;
+        private String Name;
         private ContactInformation contactInformation;
         private String description; //Tästä voisi tehdä apuluokan
         private String imageURL;
@@ -47,13 +37,14 @@ class BaseClasses {
         private AvailableTimes availableTimes;
         private String ActivityID; //tunniste tietokantaa varten
 
+
         public Activity(){
             //no-argument constructor for getData() at MainActivity
         }
 
-        public Activity(String activityID, String name, String description, String imageURL, int activityTypeEnum, int isAvailable, double price ){
+        public Activity(String activityID, String Name, String description, String imageURL, int activityTypeEnum, int isAvailable, double price ){
             this.ActivityID = activityID;
-            this.name = name;
+            this.Name = Name;
             this.description = description;
             this.imageURL = imageURL;
             this.activityTypeEnum = activityTypeEnum;
@@ -80,7 +71,7 @@ class BaseClasses {
             return this.imageURL;
         }
         public String getName(){
-            return this.name;
+            return this.Name;
         }
         public String getDescription(){
             return this.description;
