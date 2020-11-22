@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for(DataSnapshot ds : activitysnapshot.getChildren()){
             activitylist.add(ds.getValue(BaseClasses.Activity.class));
         }
-        Log.d("test", activitylist.get(0).toString());
-        Log.d("test", activitylist.get(0).getName());
+   /*     Log.d("test", activitylist.get(0).toString());
+        String activity0 = activitylist.get(0).getName() + " " + activitylist.get(0).getDescription();
+        Log.d("test", activity0);*/
     }
 }
 

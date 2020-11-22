@@ -28,12 +28,12 @@ class BaseClasses {
     static class Activity {
         private String Name;
         private ContactInformation contactInformation;
-        private String description; //Tästä voisi tehdä apuluokan
-        private String imageURL;
-        private int isAvailable; //0 = varattu/ei vapaa, 1 = vapaa
-        private double price;
+        private String Description; //Tästä voisi tehdä apuluokan
+        private String ImageURL;
+        private int IsAvailable; //0 = varattu/ei vapaa, 1 = vapaa
+        private int Price;
         private int activityTypeEnum; //numeerinen arvo aktiviteetin tyypille asetettava if -checkillä koodissa
-        private String activityType;
+        private String ActivityType;
         private AvailableTimes availableTimes;
         private String ActivityID; //tunniste tietokantaa varten
 
@@ -42,14 +42,14 @@ class BaseClasses {
             //no-argument constructor for getData() at MainActivity
         }
 
-        public Activity(String activityID, String Name, String description, String imageURL, int activityTypeEnum, int isAvailable, double price ){
+        public Activity(String activityID, String Name, String Description, String imageURL, int activityTypeEnum, int isAvailable, int price ){
             this.ActivityID = activityID;
             this.Name = Name;
-            this.description = description;
-            this.imageURL = imageURL;
+            this.Description = Description;
+            this.ImageURL = imageURL;
             this.activityTypeEnum = activityTypeEnum;
-            this.isAvailable = isAvailable;
-            this.price = price;
+            this.IsAvailable = isAvailable;
+            this.Price = price;
         }
 
         public String GetActivityType(int activityTypeEnum){
@@ -68,16 +68,16 @@ class BaseClasses {
             return "undefined";
         }
         public String getImageURL(){
-            return this.imageURL;
+            return this.ImageURL;
         }
         public String getName(){
             return this.Name;
         }
         public String getDescription(){
-            return this.description;
+            return this.Description;
         }
         public String getPrice(){
-            return String.valueOf(this.price);
+            return String.valueOf(this.Price);
         }
     }
 
