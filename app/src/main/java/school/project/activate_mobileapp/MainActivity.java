@@ -41,8 +41,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view instanceof Button) {
             button = (Button) view;
             if (button.getId() == R.id.button10) {
-                Intent intent = new Intent(this, SearchMenu.class);
-                startActivity(intent);
+                for (int i = 0; i < activitylist.size(); i += 1) {
+                    BaseClasses.Activity a = new BaseClasses.Activity();
+                    a = activitylist.get(i);
+                    String aDesc = a.getDescription();
+                    String aPrice = a.getPrice();
+                    String aName = a.getName();
+                    String activity0 = aName + " " + aDesc + " " + aPrice + ",00";
+                    Log.d("test", activity0);
+                }
+                //Intent intent = new Intent(this, SearchMenu.class);
+                //startActivity(intent);
             }
         }
     }
@@ -64,15 +73,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     public void getData(DataSnapshot datasnapshot){
         Log.d("test", "getData called");
+        activitylist.clear();
         DataSnapshot activitysnapshot = datasnapshot.child("Activities");
         for(DataSnapshot ds : activitysnapshot.getChildren()){
             activitylist.add(ds.getValue(BaseClasses.Activity.class));
         }
-   /*     Log.d("test", activitylist.get(0).toString());
+        Log.d("test", activitylist.get(0).toString());
         String activity0 = activitylist.get(0).getName() + " " + activitylist.get(0).getDescription();
-        Log.d("test", activity0);*/
+        Log.d("test", String.valueOf(activitylist.size()));
+        Log.d("test", activity0);
     }
 }
 

@@ -10,14 +10,7 @@ class BaseClasses {
 
     class Activities {
 
-       /* public void addActivity(Activity a){
-            activities.add(a);
-        }
-
-        GetActivities (Activities) {
-        Tähän Joona vähän tietokantataikoja joilla palautetaan lista kaikista aktiviteeteista
-        return activities
-
+        /*
         Näin? Vai pitääkö tuohon saada argumentti sisään jotenkin? -j
          */
        public ArrayList GetActivities(){
@@ -27,15 +20,16 @@ class BaseClasses {
 
     static class Activity {
         private String Name;
+        private String ActivityID;
         private ContactInformation contactInformation;
         private String Description; //Tästä voisi tehdä apuluokan
         private String ImageURL;
         private int IsAvailable; //0 = varattu/ei vapaa, 1 = vapaa
         private int Price;
-        private int activityTypeEnum; //numeerinen arvo aktiviteetin tyypille asetettava if -checkillä koodissa
+        private int ActivityTypeEnum; //numeerinen arvo aktiviteetin tyypille asetettava if -checkillä koodissa
         private String ActivityType;
-        private AvailableTimes availableTimes;
-        private String ActivityID; //tunniste tietokantaa varten
+        private ArrayList AvailableTimes; //Tämä objekti sisältää vapaat ajat
+
 
 
         public Activity(){
@@ -47,7 +41,7 @@ class BaseClasses {
             this.Name = Name;
             this.Description = Description;
             this.ImageURL = imageURL;
-            this.activityTypeEnum = activityTypeEnum;
+            this.ActivityTypeEnum = activityTypeEnum;
             this.IsAvailable = isAvailable;
             this.Price = price;
         }
@@ -79,22 +73,52 @@ class BaseClasses {
         public String getPrice(){
             return String.valueOf(this.Price);
         }
-    }
+        public String getActivityID() {
+            return String.valueOf(this.ActivityID);
+        }
 
-    class AvailableTimes {
-        private ArrayList<Time> times;
-        public ArrayList<Time> getReservations(String ActivityID){
+        /*public ArrayList<Time> getReservations(String ActivityID){
+
+            ArrayList<Time> times = new ArrayList<>();
             Activity activity = new Activity();
-            int len = activities.size();
-            for (int i=0; i<len ; i++){
-                if(activities.get(i).ActivityID.equals(ActivityID)){
+
+            for (int i=0; i<activities.size() ; i++){
+                if(activities.get(i).getActivityID().equals(ActivityID)){
                     activity = activities.get(i);
+                    for(int = 0; i <  )
+                }
+
+
+                //loopataan läpi activities-lista ja napataan se jossa oikea id
+            }
+
+            for(Time t : activity.){
+                times.add(t);
+            }
+
+            return times;
+        }
+    }
+/*
+    static class AvailableTimes {
+            protected ArrayList<Time> times;
+
+
+        static public ArrayList<Time> getReservations(String ActivityID){
+
+            Activity activity = new Activity();
+
+            for (int i=0; i<activities.size() ; i++){
+                if(activities.get(i).getActivityID().equals(ActivityID)){
+                        activity = activities.get(i);
                 }
                 //loopataan läpi activities-lista ja napataan se jossa oikea id
             }
-            for(Time t : activity.availableTimes.times){
+
+            for(Time t : activity.AvailableTimes.times){
                 times.add(t);
             }
+
             return times;
         }
         /* Joona tänne tarvisi vähän taikoja kanssa, että saadaan kannasta haettua lista ajoista eli Time olioista:
@@ -129,6 +153,13 @@ class BaseClasses {
             //Voi olla, että tämä joudutaan vielä muuttamaan integeriksi:
             this.availableTime = "1"; //Oletuksena asetettu aika on vapaa/olemassa
 
+        }
+
+        public String getTime() {
+            return this.interval;
+        }
+        public String getDate() {
+            return this.date;
         }
     }
 

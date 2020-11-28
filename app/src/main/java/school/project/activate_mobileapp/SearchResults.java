@@ -74,11 +74,13 @@ public class SearchResults extends AppCompatActivity {
     }
 
     // Function to add items in RecyclerView.
-    public void AddItemsToRecyclerViewArrayList()
+    public void AddItemsToRecyclerViewArrayList(ArrayList<BaseClasses.Activity> filteredList)
     {
-        source = new ArrayList<BaseClasses.Activity>();
-        source.add(test_activity);
+        source = filteredList;
+
+        //source.add(test_activity);
     }
+
 }
 
 
