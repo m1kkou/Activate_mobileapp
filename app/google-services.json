@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "833603358293",
+    "firebase_url": "https://activate-7c1cd.firebaseio.com",
+    "project_id": "activate-7c1cd",
+    "storage_bucket": "activate-7c1cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833603358293:android:daa5d2b3175e6250598edc",
+        "android_client_info": {
+          "package_name": "school.project.activate_mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833603358293-0skff18qstk285tq7tkpdlo3hscrhnp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqOIq6ZrbWHdC2ISXy7tyqPrVK-e4dcRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833603358293-0skff18qstk285tq7tkpdlo3hscrhnp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
