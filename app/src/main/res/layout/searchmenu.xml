@@ -8,191 +8,112 @@
 
     <CheckBox
         android:id="@+id/checkBox11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="38dp"
         android:text="Muu"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
+        app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.802" />
+        app:layout_constraintVertical_bias="0.722" />
 
     <CheckBox
         android:id="@+id/checkBox9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Elämys"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.373"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.802" />
+        app:layout_constraintVertical_bias="0.652" />
 
     <CheckBox
         android:id="@+id/checkBox8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hyvinvointi"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintVertical_bias="0.527" />
 
     <CheckBox
         android:id="@+id/checkBox7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kulttuuri"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.193"
+        app:layout_constraintHorizontal_bias="0.388"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.802" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="18dp"
-        android:layout_height="30dp"
-        android:text="-"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTime4"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toEndOf="@+id/editTextTime3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.514" />
-
-    <EditText
-        android:id="@+id/editTextTime4"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Kellonaika(xx:xx)"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.885"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime2"
-        app:layout_constraintVertical_bias="0.095" />
-
-    <EditText
-        android:id="@+id/editTextTime3"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="Kellonaika(xx:xx)"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime"
-        app:layout_constraintVertical_bias="0.097" />
-
-    <EditText
-        android:id="@+id/editTextTime2"
-        android:layout_width="153dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Päivämäärä(xx.xx)"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <CheckBox
         android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Oulu"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.038" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="16dp"
-        android:text="Paikkakunta:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.036" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="197dp"
+        android:layout_width="106dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Hae aktiviteettejä:"
+        android:text="Oulu"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.342"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.137" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="258dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:text="Paikkakunta:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
 
     <EditText
         android:id="@+id/editTextTime"
-        android:layout_width="153dp"
-        android:layout_height="50dp"
+        android:layout_width="267dp"
+        android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:ems="10"
-        android:hint="Päivämäärä(xx.xx)"
+        android:hint="Päivämäärä(xx.xx.20xx)"
         android:inputType="time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintVertical_bias="0.306" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_width="212dp"
+        android:layout_height="30dp"
         android:text="Ajalle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2"
-        app:layout_constraintVertical_bias="0.111" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="18dp"
-        android:layout_height="30dp"
-        android:text="-"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTime2"
-        app:layout_constraintHorizontal_bias="0.032"
-        app:layout_constraintStart_toEndOf="@+id/editTextTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.393" />
+        app:layout_constraintVertical_bias="0.221" />
 
     <Button
         android:id="@+id/button"
@@ -215,23 +136,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aktiviteetti"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintVertical_bias="0.398" />
 
     <CheckBox
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Liikunta"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintVertical_bias="0.46" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
