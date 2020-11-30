@@ -1,12 +1,18 @@
 package school.project.activate_mobileapp;
 
+import android.provider.ContactsContract;
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class BaseClasses {
     public static ArrayList<Activity> activities = MainActivity.activitylist;
+    public static DatabaseReference dbr = MainActivity.databaseReference;
+    public static DataSnapshot dss = MainActivity.dataSnapshot;
 
     class Activities {
 
@@ -36,31 +42,16 @@ class BaseClasses {
             //no-argument constructor for getData() at MainActivity
         }
 
-        public Activity(String activityID, String Name, String Description, String imageURL, int activityTypeEnum, int isAvailable, int price ){
+        public Activity(String activityID, String Name, String Description, String imageURL, String ActivityType, int isAvailable, int price ){
             this.ActivityID = activityID;
             this.Name = Name;
             this.Description = Description;
             this.ImageURL = imageURL;
-            this.ActivityTypeEnum = activityTypeEnum;
+            this.ActivityType = ActivityType;
             this.IsAvailable = isAvailable;
             this.Price = price;
         }
 
-        public String GetActivityType(int activityTypeEnum){
-            if (activityTypeEnum == 0){
-                return "Hippa";
-            }
-            if (activityTypeEnum == 1){
-                return "Urheilu";
-            }
-            if (activityTypeEnum == 2){
-                return "Elämys";
-            }
-            if (activityTypeEnum == 3){
-                return "Hyvinvointi";
-            }
-            return "undefined";
-        }
         public String getImageURL(){
             return this.ImageURL;
         }
@@ -201,7 +192,32 @@ class BaseClasses {
     }
 
 
+    public static ArrayList<Activity> getActivityDate(String Date){
+        DataSnapshot ActivitiesSnap = dss.child("Activities");
+        ArrayList<Activity> DateActivityList = new ArrayList<>();
+        for(DataSnapshot ds : ActivitiesSnap.getChildren()){
+            DataSnapshot Availableds = ds.child("AvailableTimes");
+            for(DataSnapshot timedss : Availableds.getChildren()){
+                String Date_ = timedss.child("Date").getValue().toString();
+                if(Date.equals(Date_)){
+                    DateActivityList.add(ds.getValue(Activity.class));
+                    break;
+                }
+            }
+        }
+        return DateActivityList;
+    }
 
-
+    public static ArrayList<String> getActivityTimes(String ActivityID){
+        ArrayList<String> freeTimes = new ArrayList();
+        DataSnapshot Actds = dss.child("Activities");
+        DataSnapshot ActivityDs = Actds.child(ActivityID);
+        DataSnapshot AvailableDs = ActivityDs.child("AvailableTimes");
+        for(DataSnapshot Timeds : AvailableDs.getChildren()){
+            String Interval = Timeds.child("Interval").getValue().toString();
+            freeTimes.add(Interval);
+        }
+        return freeTimes;
+    }
 }
 

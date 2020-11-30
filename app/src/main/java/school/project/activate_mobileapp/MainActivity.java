@@ -20,12 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private DatabaseReference databaseReference;
-    public DataSnapshot dataSnapshot;
+    public static DatabaseReference databaseReference;
+    public static DataSnapshot dataSnapshot;
     public static ArrayList<BaseClasses.Activity> activitylist = new ArrayList<>();
-    public ArrayList<BaseClasses.Activity> getActivitylist() {
-        return activitylist;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String activity0 = aName + " " + aDesc + " " + aPrice + ",00";
                     Log.d("test", activity0);
                 }
-                //Intent intent = new Intent(this, SearchMenu.class);
-                //startActivity(intent);
+                Intent intent = new Intent(this, SearchMenu.class);
+                startActivity(intent);
             }
         }
     }
