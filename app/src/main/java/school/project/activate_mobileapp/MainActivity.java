@@ -75,10 +75,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("test", "getData called");
         activitylist.clear();
         DataSnapshot activitysnapshot = datasnapshot.child("Activities");
+        int Index = 0;
         for(DataSnapshot ds : activitysnapshot.getChildren()){
             activitylist.add(ds.getValue(BaseClasses.Activity.class));
+            activitylist.get(Index).setActivityID(ds.getKey());
+            Index++;
         }
-        Log.d("test", activitylist.get(0).toString());
+        Log.d("test", activitylist.get(0).getActivityID());
         String activity0 = activitylist.get(0).getName() + " " + activitylist.get(0).getDescription();
         Log.d("test", String.valueOf(activitylist.size()));
         Log.d("test", activity0);

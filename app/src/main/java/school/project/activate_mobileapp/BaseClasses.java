@@ -68,6 +68,9 @@ class BaseClasses {
             return String.valueOf(this.ActivityID);
         }
 
+        public void setActivityID(String ID) {
+            ActivityID = ID;
+        }
         /*public ArrayList<Time> getReservations(String ActivityID){
 
             ArrayList<Time> times = new ArrayList<>();
@@ -166,6 +169,9 @@ class BaseClasses {
 
         public String createID() {
             return name;
+        }
+        public void SaveCustomer(){
+            dbr.child("Customers").child(customerID).setValue(this);
         }
 
     }
