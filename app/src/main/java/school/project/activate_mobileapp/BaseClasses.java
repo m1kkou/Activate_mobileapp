@@ -225,5 +225,18 @@ class BaseClasses {
         }
         return freeTimes;
     }
+
+    public static ArrayList<Activity> FilteredActivities(ArrayList<String> Filters){
+        DataSnapshot DataSs = dss.child("Activities");
+        ArrayList<Activity> FilteredList = new ArrayList<>();
+        for(DataSnapshot ds : DataSs.getChildren()){
+            for(String Filter : Filters){
+                if(ds.child("ActivityType").toString().equals(Filter)){
+                    FilteredList.add(ds.getValue(Activity.class));
+                }
+            }
+        }
+        return FilteredList;
+    }
 }
 
