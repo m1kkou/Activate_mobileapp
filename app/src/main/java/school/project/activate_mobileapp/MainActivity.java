@@ -1,9 +1,7 @@
 package school.project.activate_mobileapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataSnapshot = snapshot;
-                getData(dataSnapshot);
+                Services.getData(dataSnapshot);
                 Log.d("test", "database saved in snapshot");
             }
 
@@ -69,22 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-    }
-
-    public void getData(DataSnapshot datasnapshot){
-        Log.d("test", "getData called");
-        activitylist.clear();
-        DataSnapshot activitysnapshot = datasnapshot.child("Activities");
-        int Index = 0;
-        for(DataSnapshot ds : activitysnapshot.getChildren()){
-            activitylist.add(ds.getValue(BaseClasses.Activity.class));
-            activitylist.get(Index).setActivityID(ds.getKey());
-            Index++;
-        }
-        Log.d("test", activitylist.get(0).getActivityID());
-        String activity0 = activitylist.get(0).getName() + " " + activitylist.get(0).getDescription();
-        Log.d("test", String.valueOf(activitylist.size()));
-        Log.d("test", activity0);
     }
 }
 

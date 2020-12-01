@@ -3,7 +3,6 @@ package school.project.activate_mobileapp;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,16 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class SearchResults extends AppCompatActivity {
-
     RecyclerView recyclerView;
     ArrayList<BaseClasses.Activity> source;
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     Adapter adapter;
     LinearLayoutManager HorizontalLayout;
 
-    BaseClasses.Activity test_activity;
 
-    View ChildView;
     int RecyclerViewItemPosition;
 
     @Override
@@ -39,10 +35,10 @@ public class SearchResults extends AppCompatActivity {
         Log.d("test", source.get(0).getDescription());
         Log.d("test", source.get(0).getImageURL());
         Log.d("test", source.get(0).getPrice());
-        Log.d("test", BaseClasses.getActivityDate("24.12.2020").get(0).getName());
-        Log.d("test", BaseClasses.getActivityDate("24.12.2020").get(1).getName());
-        Log.d("test", BaseClasses.getActivityDate("24.12.2020").get(2).getName());
-        Log.d("test", BaseClasses.getActivityTimes("A1").toString());
+        Log.d("test", Services.getActivityDate("24.12.2020").get(0).getName());
+        Log.d("test", Services.getActivityDate("24.12.2020").get(1).getName());
+        Log.d("test", Services.getActivityDate("24.12.2020").get(2).getName());
+        Log.d("test", Services.getActivityTimes("A1").toString());
 
         recyclerView
                 = (RecyclerView)findViewById(
