@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="school.project.activate_mobileapp">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,7 @@
         <activity android:name=".SearchMenu" />
         <activity android:name=".SearchResultMenu" />
         <activity android:name=".OrderView" />
+        <activity android:name=".SearchResults"/>
     </application>
 
 </manifest>

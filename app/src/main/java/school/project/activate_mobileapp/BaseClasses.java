@@ -1,85 +1,133 @@
 package school.project.activate_mobileapp;
-import android.app.Activity;
+
+import android.provider.ContactsContract;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class BaseClasses {
+    public static ArrayList<Activity> activities = MainActivity.activitylist;
+    public static DatabaseReference dbr = MainActivity.databaseReference;
+    public static DataSnapshot dss = MainActivity.dataSnapshot;
 
     class Activities {
-        private ArrayList<Activity> activities;
 
-        public void addActivity(Activity a){
-            activities.add(a);
-        }
-
-
-        /*GetActivities (Activities) {
-        Tähän Joona vähän tietokantataikoja joilla palautetaan lista kaikista aktiviteeteista
-        return activities
-        }
+        /*
+        Näin? Vai pitääkö tuohon saada argumentti sisään jotenkin? -j
          */
+       public ArrayList GetActivities(){
+           return activities;
+       }
     }
 
     static class Activity {
-        private String name;
+        private String Name;
+        private String ActivityID;
         private ContactInformation contactInformation;
-        private String description; //Tästä voisi tehdä apuluokan
-        private String imageURL;
-        private int isAvailable; //0 = varattu/ei vapaa, 1 = vapaa
-        private double price;
-        private int activityTypeEnum; //numeerinen arvo aktiviteetin tyypille asetettava if -checkillä koodissa
-        private String activityType;
-        private AvailableTimes availableTimes;
-        private String ActivityID; //tunniste tietokantaa varten
+        private String Description; //Tästä voisi tehdä apuluokan
+        private String ImageURL;
+        private int IsAvailable; //0 = varattu/ei vapaa, 1 = vapaa
+        private int Price;
+        private int ActivityTypeEnum; //numeerinen arvo aktiviteetin tyypille asetettava if -checkillä koodissa
+        private String ActivityType;
+        private ArrayList AvailableTimes; //Tämä objekti sisältää vapaat ajat
 
-        public Activity(String activityID, String name, String description, String imageURL, int activityTypeEnum, int isAvailable, double price ){
+
+
+        public Activity(){
+            //no-argument constructor for getData() at MainActivity
+        }
+
+        public Activity(String activityID, String Name, String Description, String imageURL, String ActivityType, int isAvailable, int price ){
             this.ActivityID = activityID;
-            this.name = name;
-            this.description = description;
-            this.imageURL = imageURL;
-            this.activityTypeEnum = activityTypeEnum;
-            this.isAvailable = isAvailable;
-            this.price = price;
+            this.Name = Name;
+            this.Description = Description;
+            this.ImageURL = imageURL;
+            this.ActivityType = ActivityType;
+            this.IsAvailable = isAvailable;
+            this.Price = price;
         }
 
-        public String GetActivityType(int activityTypeEnum){
-            if (activityTypeEnum == 0){
-                return "Hippa";
-            }
-            if (activityTypeEnum == 1){
-                return "Urheilu";
-            }
-            if (activityTypeEnum == 2){
-                return "Elämys";
-            }
-            if (activityTypeEnum == 3){
-                return "Hyvinvointi";
-            }
-            return "undefined";
-        }
         public String getImageURL(){
-            return this.imageURL;
+            return this.ImageURL;
         }
         public String getName(){
-            return this.name;
+            return this.Name;
         }
         public String getDescription(){
-            return this.description;
+            return this.Description;
         }
         public String getPrice(){
-            return String.valueOf(this.price);
+            return String.valueOf(this.Price);
+        }
+        public String getActivityID() {
+            return String.valueOf(this.ActivityID);
+        }
+
+        public void setActivityID(String ID) {
+            ActivityID = ID;
+        }
+        /*public ArrayList<Time> getReservations(String ActivityID){
+
+            ArrayList<Time> times = new ArrayList<>();
+            Activity activity = new Activity();
+
+            for (int i=0; i<activities.size() ; i++){
+                if(activities.get(i).getActivityID().equals(ActivityID)){
+                    activity = activities.get(i);
+                    for(int = 0; i <  )
+                }
+
+
+                //loopataan läpi activities-lista ja napataan se jossa oikea id
+            }
+
+            for(Time t : activity.){
+                times.add(t);
+            }
+
+            return times;
         }
     }
+/*
+    static class AvailableTimes {
+            protected ArrayList<Time> times;
 
-    class AvailableTimes {
-        private ArrayList<Time> times;
 
+        static public ArrayList<Time> getReservations(String ActivityID){
+
+            Activity activity = new Activity();
+
+            for (int i=0; i<activities.size() ; i++){
+                if(activities.get(i).getActivityID().equals(ActivityID)){
+                        activity = activities.get(i);
+                }
+                //loopataan läpi activities-lista ja napataan se jossa oikea id
+            }
+
+            for(Time t : activity.AvailableTimes.times){
+                times.add(t);
+            }
+
+            return times;
+        }
         /* Joona tänne tarvisi vähän taikoja kanssa, että saadaan kannasta haettua lista ajoista eli Time olioista:
         public ArrayList<Time> getReservations(String ActivityID){
         Haetaan ID:n mukaisen aktiviteetin aika -oliot.
 
             return ArrayList<Time>;
         }
+
+        En oo varma toimiiko ylläoleva koodi, toivottavasti :D
+        Mietin vaan, missä tilanteessa tarvitaan metodia joka ottaa activity-id:n ja näyttää tuon time-listan?
+        Esim. jos käyttäjä valitsee aktiviteetin josta sitten aikoja näytetään, niin siinä vaiheessahan ollaan jo
+        Activity valittu ja voidaan näyttää time-luokan sisältöä siinä missä muutakin Activity-luokan tietoja.
+
+
          */
     }
     class Time {
@@ -100,6 +148,13 @@ class BaseClasses {
             this.availableTime = "1"; //Oletuksena asetettu aika on vapaa/olemassa
 
         }
+
+        public String getTime() {
+            return this.interval;
+        }
+        public String getDate() {
+            return this.date;
+        }
     }
 
     class Customer {
@@ -114,6 +169,9 @@ class BaseClasses {
 
         public String createID() {
             return name;
+        }
+        public void SaveCustomer(){
+            dbr.child("Customers").child(customerID).setValue(this);
         }
 
     }
@@ -140,7 +198,32 @@ class BaseClasses {
     }
 
 
+    public static ArrayList<Activity> getActivityDate(String Date){
+        DataSnapshot ActivitiesSnap = dss.child("Activities");
+        ArrayList<Activity> DateActivityList = new ArrayList<>();
+        for(DataSnapshot ds : ActivitiesSnap.getChildren()){
+            DataSnapshot Availableds = ds.child("AvailableTimes");
+            for(DataSnapshot timedss : Availableds.getChildren()){
+                String Date_ = timedss.child("Date").getValue().toString();
+                if(Date.equals(Date_)){
+                    DateActivityList.add(ds.getValue(Activity.class));
+                    break;
+                }
+            }
+        }
+        return DateActivityList;
+    }
 
-
+    public static ArrayList<String> getActivityTimes(String ActivityID){
+        ArrayList<String> freeTimes = new ArrayList();
+        DataSnapshot Actds = dss.child("Activities");
+        DataSnapshot ActivityDs = Actds.child(ActivityID);
+        DataSnapshot AvailableDs = ActivityDs.child("AvailableTimes");
+        for(DataSnapshot Timeds : AvailableDs.getChildren()){
+            String Interval = Timeds.child("Interval").getValue().toString();
+            freeTimes.add(Interval);
+        }
+        return freeTimes;
+    }
 }
 

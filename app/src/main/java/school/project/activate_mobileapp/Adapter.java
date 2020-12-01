@@ -2,6 +2,7 @@ package school.project.activate_mobileapp;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,8 @@ import java.util.List;
             // parameterised constructor for View Holder class
             // which takes the view as a parameter
             public ActivityView(View view) {
+      //          StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+      //          StrictMode.setThreadPolicy(policy);
                 super(view);
 
                 imageView = (ImageView) view
