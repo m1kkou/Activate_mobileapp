@@ -69,7 +69,10 @@ public class Services extends MainActivity{
         return freeTimes;
     }
 
-    public static ArrayList<BaseClasses.Activity> getFilteredActivities(ArrayList<String> filters){
+    public static ArrayList<BaseClasses.Activity> getFilteredActivities(ArrayList<String> filters) {
+        if(filters.isEmpty()){
+            return BaseClasses.activities;
+        }
         DataSnapshot ActivitiesSnapShot = dss.child("Activities");
         ArrayList<BaseClasses.Activity> filteredActivities = new ArrayList<>();
         int index = 0;
