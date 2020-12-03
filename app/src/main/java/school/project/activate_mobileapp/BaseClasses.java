@@ -22,7 +22,6 @@ class BaseClasses {
     static class Activity {
         private String Name;
         private String ActivityID;
-        private ContactInformation contactInformation;
         private String Description; //Tästä voisi tehdä apuluokan
         private String ImageURL;
         private int IsAvailable; //0 = varattu/ei vapaa, 1 = vapaa
@@ -89,44 +88,24 @@ class BaseClasses {
         }
     }
 
-    class Customer {
+    static class Customer {
         private String name;
-        private ContactInformation contactInformation;
-
+        private String email;
+        private String GSM;
         private String customerID; //tunniste tietokantaa varten
 
-        public Customer(String name) {
+        public Customer(String name, String email, String GSM, String ID ) {
             this.name = name;
-        }
-
-        public String createID() {
-            return name;
-        }
-        public void SaveCustomer(){
-            dbr.child("Customers").child(customerID).setValue(this);
-        }
-
-    }
-
-    class ContactInformation {
-        private String phoneNumber;
-        private String email;
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        public void setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
             this.email = email;
+            this.GSM = GSM;
+            this.customerID = ID;
+        }
+
+        public void SaveCustomer(Customer c) {
+            dbr.child("Customers").push().setValue(c.name);
+            
         }
     }
+
 }
 

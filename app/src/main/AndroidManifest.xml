@@ -20,6 +20,7 @@
         <activity android:name=".SearchMenu" />
         <activity android:name=".OrderView" />
         <activity android:name=".SearchResults"/>
+        <activity android:name=".BookingView"/>
     </application>
 
 </manifest>

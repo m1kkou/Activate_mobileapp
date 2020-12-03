@@ -1,8 +1,10 @@
 package school.project.activate_mobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SearchResults extends AppCompatActivity {
+public class SearchResults extends AppCompatActivity implements View.OnClickListener {
     RecyclerView recyclerView;
     ArrayList<BaseClasses.Activity> source;
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
@@ -60,6 +62,7 @@ public class SearchResults extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        findViewById(R.id.button2).setOnClickListener(this);
     }
 
     // Function to add items in RecyclerView.
@@ -69,7 +72,19 @@ public class SearchResults extends AppCompatActivity {
 
         //source.add(test_activity);
     }
+    @Override
+    public void onClick(View view) {
+        Button button;
+        Intent intent = new Intent(this, BookingView.class);
+        if (view instanceof Button) {
+            button = (Button) view;
+            if (button.getId() == R.id.button2) {
+                startActivity(intent);
+            }
+        }
+    }
 
 }
+
 
 

@@ -59,7 +59,7 @@ import java.util.List;
         }
         @Override
         public void onClick(View view) {
-         //   Intent intent = new Intent(this, OrderView.class);
+            //Intent intent = new Intent(ActivityView.this, OrderView.class);
        /*     if (view instanceof Button) {
                 button = (Button) view;
                 if (button.getId() == R.id.orderButton) {

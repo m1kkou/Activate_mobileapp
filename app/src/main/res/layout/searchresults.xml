@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="school.project.activate_mobileapp.SearchResults"
-    android:id="@+id/relativelayoutroot">
+    android:id="@+id/relativelayoutroot"
+    android:layout_weight="0.8">
     <RelativeLayout
         android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -31,12 +32,15 @@
         android:layout_height="50dp"
         android:layout_below="@id/relativelayoutchild1"
         tools:context="school.project.activate_mobileapp.SearchResults"
-        android:id="@+id/relativelayoutchild2">
+        android:id="@+id/relativelayoutchild2"
+        android:layout_weight="0.2">
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:onClick="onClick"
+            android:text="VARAA" />
     </RelativeLayout>
 </RelativeLayout>
