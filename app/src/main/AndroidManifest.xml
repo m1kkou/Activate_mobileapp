@@ -18,7 +18,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchMenu" />
-        <activity android:name=".SearchResultMenu" />
         <activity android:name=".OrderView" />
         <activity android:name=".SearchResults"/>
     </application>
