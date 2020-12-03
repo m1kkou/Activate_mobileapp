@@ -1,5 +1,6 @@
 package school.project.activate_mobileapp;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.StrictMode;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +22,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-    public class Adapter extends RecyclerView.Adapter<Adapter.ActivityView> {
+    public class Adapter extends RecyclerView.Adapter<Adapter.ActivityView> implements View.OnClickListener {
 
         // List with Activity type
         private List<BaseClasses.Activity> list;
+
 
         // View Holder class which
         // extends RecyclerView.ViewHolder
@@ -33,13 +36,15 @@ import java.util.List;
             TextView headerTextView;
             TextView descriptionTextView;
             TextView priceTextView;
+            Button orderButton;
 
             // parameterised constructor for View Holder class
             // which takes the view as a parameter
             public ActivityView(View view) {
-      //          StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-      //          StrictMode.setThreadPolicy(policy);
+
                 super(view);
+
+                orderButton = (Button) view .findViewById(R.id.orderButton);
 
                 imageView = (ImageView) view
                         .findViewById(R.id.image);
@@ -50,7 +55,20 @@ import java.util.List;
                 priceTextView = (TextView) view
                         .findViewById(R.id.price);
             }
+
         }
+        @Override
+        public void onClick(View view) {
+         //   Intent intent = new Intent(this, OrderView.class);
+       /*     if (view instanceof Button) {
+                button = (Button) view;
+                if (button.getId() == R.id.orderButton) {
+                    Intent intent = new Intent();
+                    startActivity(intent);
+                }
+            }*/
+        }
+
 
         // Constructor for adapter class
         // which takes a list of String type
