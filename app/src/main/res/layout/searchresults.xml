@@ -7,15 +7,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="school.project.activate_mobileapp.SearchResults"
-    android:id="@+id/relativelayout">
+    android:id="@+id/relativelayoutroot">
+    <RelativeLayout
+        android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       tools:context="school.project.activate_mobileapp.SearchResults"
+       android:id="@+id/relativelayoutchild1">
 
-    <!--Recycler View widget-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:scrollbars="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
+       <!--Recycler View widget-->
+      <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:scrollbars="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/relativelayoutchild1"
+        tools:context="school.project.activate_mobileapp.SearchResults"
+        android:id="@+id/relativelayoutchild2">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </RelativeLayout>
 </RelativeLayout>

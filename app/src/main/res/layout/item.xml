@@ -7,8 +7,8 @@
     android:id="@+id/card_view"
     android:layout_gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    card_view:cardCornerRadius="20dp">
+    android:layout_height="800dp"
+    >
 
     <RelativeLayout
         android:id="@+id/data_layout"
@@ -52,14 +52,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 
-        <Button
-            android:id="@+id/orderButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/price"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:text="Varaa" />
+
 
         <ScrollView
             android:layout_width="match_parent"

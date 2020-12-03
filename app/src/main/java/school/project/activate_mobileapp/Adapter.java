@@ -44,7 +44,7 @@ import java.util.List;
 
                 super(view);
 
-                orderButton = (Button) view .findViewById(R.id.orderButton);
+            //    orderButton = (Button) view .findViewById(R.id.orderButton);
 
                 imageView = (ImageView) view
                         .findViewById(R.id.image);
