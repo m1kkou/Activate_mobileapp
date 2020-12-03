@@ -89,10 +89,10 @@ class BaseClasses {
     }
 
     static class Customer {
-        private String name;
-        private String email;
-        private String GSM;
-        private String customerID; //tunniste tietokantaa varten
+        public String name;
+        public String email;
+        public String GSM;
+        public String customerID; //tunniste tietokantaa varten
 
         public Customer(String name, String email, String GSM, String ID ) {
             this.name = name;
@@ -101,11 +101,15 @@ class BaseClasses {
             this.customerID = ID;
         }
 
+        public void setCustomerID(String customerID) {
+            this.customerID = customerID;
+        }
+
         public void SaveCustomer(Customer c) {
-            dbr.child("Customers").push().setValue(c.name);
-            
+            String key = dbr.child("Customers").push().getKey();
+            c.setCustomerID(key);
+            dbr.child("Customers").child(key).setValue(c);
         }
     }
-
 }
 
