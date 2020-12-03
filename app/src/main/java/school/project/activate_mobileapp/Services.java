@@ -1,5 +1,6 @@
 package school.project.activate_mobileapp;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -66,5 +67,22 @@ public class Services extends MainActivity{
             freeTimes.add(Interval);
         }
         return freeTimes;
+    }
+
+    public static ArrayList<BaseClasses.Activity> getFilteredActivities(ArrayList<String> filters){
+        DataSnapshot ActivitiesSnapShot = dss.child("Activities");
+        ArrayList<BaseClasses.Activity> filteredActivities = new ArrayList<>();
+        int index = 0;
+        for(DataSnapshot ds : ActivitiesSnapShot.getChildren()){
+            String Filter = ds.child("ActivityType").getValue().toString();
+            for(String filter : filters){
+                if(Filter.equals(filter)){
+                    filteredActivities.add(ds.getValue(BaseClasses.Activity.class));
+                    filteredActivities.get(index).setActivityID(ds.getKey());
+                    index++;
+                }
+            }
+        }
+        return filteredActivities;
     }
 }
