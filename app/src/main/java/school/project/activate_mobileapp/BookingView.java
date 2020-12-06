@@ -6,14 +6,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 
 public class BookingView extends AppCompatActivity implements View.OnClickListener {
     public static DatabaseReference databaseReference;
+
+    BaseClasses.Activity activity = new BaseClasses.Activity();
+    TextView header;
 
     EditText editTextName;
     EditText editTextEmail;
@@ -25,11 +33,19 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             super.onCreate(savedInstanceState);
             setContentView(R.layout.orderview);
 
+            Intent intent = getIntent();
+
+            activity = SearchResults.source.get(intent.getIntExtra("activityIndex", 0));
+            Log.d("BookingView intent", Integer.toString(intent.getIntExtra("activityIndex", 0)));
+
             findViewById(R.id.button4).setOnClickListener(this);
             findViewById(R.id.button5).setOnClickListener(this);
+            header = (TextView) findViewById(R.id.textViewHeader);
             editTextName = (EditText) findViewById(R.id.editTextName);
             editTextEmail = (EditText) findViewById(R.id.editTextEmail);
             editTextGSM = (EditText) findViewById(R.id.editTextGSM);
+
+            header.setText(activity.getName());
         }
 
         public void onClick(View view) {

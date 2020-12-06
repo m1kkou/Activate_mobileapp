@@ -7,15 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="school.project.activate_mobileapp.SearchResults"
-    android:id="@+id/relativelayoutroot"
-    android:layout_weight="1">
-    <RelativeLayout
-        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       tools:context="school.project.activate_mobileapp.SearchResults"
-       android:id="@+id/relativelayoutchild1"
-        android:layout_weight="0.8">
-
+    android:id="@+id/relativelayout">
 
        <!--Recycler View widget-->
         <androidx.recyclerview.widget.RecyclerView
@@ -26,23 +18,5 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/relativelayoutchild1"
-        tools:context="school.project.activate_mobileapp.SearchResults"
-        android:id="@+id/relativelayoutchild2"
-        android:layout_weight="0.2">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:onClick="onClick"
-            android:text="VARAA" />
-    </RelativeLayout>
 
 </RelativeLayout>

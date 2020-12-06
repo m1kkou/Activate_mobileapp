@@ -3,6 +3,7 @@ package school.project.activate_mobileapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,11 +15,11 @@ import java.util.ArrayList;
 
 public class SearchResults extends AppCompatActivity implements ListItemClickListener {
     RecyclerView recyclerView;
-    ArrayList<BaseClasses.Activity> source;
+    public static ArrayList<BaseClasses.Activity> source;
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     Adapter adapter;
     LinearLayoutManager HorizontalLayout;
-    
+
 
     int RecyclerViewItemPosition;
 
@@ -76,6 +77,8 @@ public class SearchResults extends AppCompatActivity implements ListItemClickLis
     @Override
     public void onListItemClick(int position) {
         Intent intent = new Intent(this, BookingView.class);
+        intent.putExtra("activityIndex", position);
+        Log.d("SearchResults intent", Integer.toString(position));
         startActivity(intent);
     }
 
