@@ -53,7 +53,7 @@ public class Services extends MainActivity{
         }
         return DateActivityList;
     }
-
+/*
     public static ArrayList<String> getActivityTimes(String ActivityID){
         //getActivityTimes takes ActivityID as parameter, and uses it to find corresponding activity from DataSnapshot
         //ActivityID is the same as key of each activity-node in firebase database
@@ -65,6 +65,20 @@ public class Services extends MainActivity{
         for(DataSnapshot Timeds : AvailableDs.getChildren()){
             String Interval = Timeds.child("Interval").getValue().toString();
             freeTimes.add(Interval);
+        }
+        return freeTimes;
+    }
+*/
+    public static ArrayList<BaseClasses.Time> getActivityTimes(String ActivityID){
+        //getActivityTimes takes ActivityID as parameter, and uses it to find corresponding activity from DataSnapshot
+        //ActivityID is the same as key of each activity-node in firebase database
+        //Within given Activity, getActivityTimes loops through every Time-node, and saves Interval-values in ArrayList freeTimes
+        ArrayList<BaseClasses.Time> freeTimes = new ArrayList();
+        DataSnapshot Actds = dss.child("Activities");
+        DataSnapshot ActivityDs = Actds.child(ActivityID);
+        DataSnapshot AvailableDs = ActivityDs.child("AvailableTimes");
+        for(DataSnapshot Timeds : AvailableDs.getChildren()){
+            freeTimes.add(Timeds.getValue(BaseClasses.Time.class));
         }
         return freeTimes;
     }

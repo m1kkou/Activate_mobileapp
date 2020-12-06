@@ -94,11 +94,10 @@ class BaseClasses {
         public String GSM;
         public String customerID; //tunniste tietokantaa varten
 
-        public Customer(String name, String email, String GSM, String ID ) {
+        public Customer(String name, String email, String GSM) {
             this.name = name;
             this.email = email;
             this.GSM = GSM;
-            this.customerID = ID;
         }
 
         public void setCustomerID(String customerID) {
@@ -110,6 +109,29 @@ class BaseClasses {
             c.setCustomerID(key);
             dbr.child("Customers").child(key).setValue(c);
         }
+    }
+
+    static class Order {
+        public Activity activity;
+        public Customer customer;
+
+        public Order(){
+            this.activity = new Activity();
+            this.customer = new Customer("", "", "");
+        }
+
+        public void setActivityForOrder(Activity a){
+            this.activity = a;
+        }
+
+        public void setCustomerForOrder(Customer c){
+            this.customer = c;
+        }
+
+        public Order getOrder(){
+            return this;
+        }
+
     }
 }
 

@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -24,7 +23,7 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.bookingview);
+            setContentView(R.layout.orderview);
 
             findViewById(R.id.button4).setOnClickListener(this);
             findViewById(R.id.button5).setOnClickListener(this);
@@ -50,11 +49,11 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             if (view instanceof Button) {
                 button = (Button) view;
                 if (button.getId() == R.id.button5) {
-                    String name = editTextName.toString();
-                    String email = editTextEmail.toString();
-                    String GSM = editTextGSM.toString();
-                    String customerID = "1234";
-                    BaseClasses.Customer c = new BaseClasses.Customer(name, email, GSM, customerID);
+                    String name = editTextName.getText().toString();
+                    String email = editTextEmail.getText().toString();
+                    String GSM = editTextGSM.getText().toString();
+
+                    BaseClasses.Customer c = new BaseClasses.Customer(name, email, GSM);
                     Log.d("Customer", c.toString());
 
                     c.SaveCustomer(c);

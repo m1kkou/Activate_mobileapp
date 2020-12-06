@@ -12,7 +12,7 @@ public class OrderView extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.orderview);
+        setContentView(R.layout.ordercompletedview);
 
         findViewById(R.id.button6).setOnClickListener(this);
     }
