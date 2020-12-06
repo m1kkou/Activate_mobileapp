@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,15 +23,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-    public class Adapter extends RecyclerView.Adapter<Adapter.ActivityView> implements View.OnClickListener {
-
+    public class Adapter extends RecyclerView.Adapter<Adapter.ActivityView>  {
+        final private ListItemClickListener mOnClickListener;
         // List with Activity type
         private List<BaseClasses.Activity> list;
 
 
+
+
         // View Holder class which
         // extends RecyclerView.ViewHolder
-        public class ActivityView extends RecyclerView.ViewHolder {
+        public class ActivityView extends RecyclerView.ViewHolder implements View.OnClickListener {
+
 
             ImageView imageView;
             TextView headerTextView;
@@ -38,42 +42,39 @@ import java.util.List;
             TextView priceTextView;
             Button orderButton;
 
+
             // parameterised constructor for View Holder class
             // which takes the view as a parameter
-            public ActivityView(View view) {
+            public ActivityView(View view)  {
 
                 super(view);
 
-            //    orderButton = (Button) view .findViewById(R.id.orderButton);
-
                 imageView = (ImageView) view
                         .findViewById(R.id.image);
+
                 headerTextView = (TextView) view
                         .findViewById(R.id.header);
                 descriptionTextView = (TextView) view
                         .findViewById(R.id.description);
                 priceTextView = (TextView) view
                         .findViewById(R.id.price);
+                orderButton = (Button) view
+                        .findViewById(R.id.orderButton);
+                orderButton.setOnClickListener(this);
             }
 
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                mOnClickListener.onListItemClick(position);
+            }
         }
-        @Override
-        public void onClick(View view) {
-            //Intent intent = new Intent(ActivityView.this, OrderView.class);
-       /*     if (view instanceof Button) {
-                button = (Button) view;
-                if (button.getId() == R.id.orderButton) {
-                    Intent intent = new Intent();
-                    startActivity(intent);
-                }
-            }*/
-        }
-
 
         // Constructor for adapter class
         // which takes a list of String type
-        public Adapter(List<BaseClasses.Activity> horizontalList) {
+        public Adapter(List<BaseClasses.Activity> horizontalList, ListItemClickListener onClickListener) {
             this.list = horizontalList;
+            this.mOnClickListener = onClickListener;
         }
 
         // Override onCreateViewHolder which deals
@@ -106,6 +107,8 @@ import java.util.List;
             holder.headerTextView.setText(list.get(position).getName());
             holder.descriptionTextView.setText(list.get(position).getDescription());
             holder.priceTextView.setText(list.get(position).getPrice());
+
+
         }
 
         // Override getItemCount which Returns
@@ -133,5 +136,8 @@ import java.util.List;
         }
 
     }
+interface ListItemClickListener{
+    void onListItemClick(int position);
+}
 
 

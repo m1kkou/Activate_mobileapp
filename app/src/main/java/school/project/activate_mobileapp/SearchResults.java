@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SearchResults extends AppCompatActivity implements View.OnClickListener {
+public class SearchResults extends AppCompatActivity implements ListItemClickListener {
     RecyclerView recyclerView;
     ArrayList<BaseClasses.Activity> source;
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     Adapter adapter;
     LinearLayoutManager HorizontalLayout;
-
+    
 
     int RecyclerViewItemPosition;
 
@@ -47,7 +47,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
 
         // calling constructor of adapter
         // with source list as a parameter
-        adapter = new Adapter(source);
+        adapter = new Adapter(source, this );
 
         // Set Horizontal Layout Manager
         // for Recycler view
@@ -62,7 +62,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         recyclerView.setAdapter(adapter);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        findViewById(R.id.button2).setOnClickListener(this);
+
     }
 
     // Function to add items in RecyclerView.
@@ -72,17 +72,13 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
 
         //source.add(test_activity);
     }
+
     @Override
-    public void onClick(View view) {
-        Button button;
+    public void onListItemClick(int position) {
         Intent intent = new Intent(this, BookingView.class);
-        if (view instanceof Button) {
-            button = (Button) view;
-            if (button.getId() == R.id.button2) {
-                startActivity(intent);
-            }
-        }
+        startActivity(intent);
     }
+
 
 }
 
