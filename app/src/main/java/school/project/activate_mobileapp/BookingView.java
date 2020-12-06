@@ -69,10 +69,13 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
                     String email = editTextEmail.getText().toString();
                     String GSM = editTextGSM.getText().toString();
 
-                    BaseClasses.Customer c = new BaseClasses.Customer(name, email, GSM);
-                    Log.d("Customer", c.toString());
 
-                    c.SaveCustomer(c);
+                    BaseClasses.Customer customer = new BaseClasses.Customer(name, email, GSM);
+                    BaseClasses.Order order = new BaseClasses.Order(activity, customer);
+                    Log.d("Order", order.activity.getName());
+                    Log.d("Order", order.customer.getName());
+
+                    customer.SaveCustomer(customer);
                     Intent intent = new Intent(this, OrderView.class);
                     startActivity(intent);
                 }

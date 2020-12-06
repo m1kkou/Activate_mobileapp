@@ -94,11 +94,43 @@ class BaseClasses {
         public String GSM;
         public String customerID; //tunniste tietokantaa varten
 
+
+        public Customer(){
+        }
         public Customer(String name, String email, String GSM) {
             this.name = name;
             this.email = email;
             this.GSM = GSM;
         }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public void setGSM(String GSM) {
+            this.GSM = GSM;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getGSM() {
+            return GSM;
+        }
+
+        public String getCustomerID() {
+            return customerID;
+        }
+
 
         public void setCustomerID(String customerID) {
             this.customerID = customerID;
@@ -117,7 +149,13 @@ class BaseClasses {
 
         public Order(){
             this.activity = new Activity();
-            this.customer = new Customer("", "", "");
+            this.customer = new Customer();
+        }
+
+        public Order(Activity a,Customer c){
+            this.activity = a;
+            this.customer = c;
+
         }
 
         public void setActivityForOrder(Activity a){
