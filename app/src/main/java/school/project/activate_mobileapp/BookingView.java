@@ -27,6 +27,8 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
     ArrayList<String> availableTimes = new ArrayList<>();
 
     BaseClasses.Activity activity = new BaseClasses.Activity();
+    ArrayList<BaseClasses.Time> availableActivity = new ArrayList<>();
+
     TextView activityDescription;
 
     EditText editTextName;
@@ -43,14 +45,15 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             activity = SearchResults.source.get(intent.getIntExtra("activityIndex", 0));
             Log.d("BookingView intent", Integer.toString(intent.getIntExtra("activityIndex", 0)));
             String ActivityID = activity.getActivityID();
+            Log.d("testi", ActivityID);
             ArrayList<BaseClasses.Time> timeslist = Services.getActivityTimes(ActivityID);
             for(BaseClasses.Time t : timeslist){
-                Log.d("testi", t.getTime());
                 availableTimes.add(t.getTime());
             }
+            Log.d("testi", timeslist.toString());
 
             //availableTimes.add("testi");
-            Log.d("aTime", activity.getAvailableTimes().get(0).toString());
+            Log.d("testi", Integer.toString(timeslist.size()));
 
             int j = 0;
             for(int i = 0; i < activity.getAvailableTimes().size(); i+=1){
@@ -59,6 +62,7 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
                 Log.d("availableTimesArray: ", t.getTime());
                 if(t.isAvailable()){
                     availableTimes.add(t.getTime());
+                    availableActivity.add(t);
                     Log.d("availableTimesArray: ", availableTimes.get(j).toString());
                     j += 1;
                 }
@@ -109,12 +113,14 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
                     String GSM = editTextGSM.getText().toString();
 
 
+
                     BaseClasses.Customer customer = new BaseClasses.Customer(name, email, GSM);
                     BaseClasses.Order order = new BaseClasses.Order(activity, customer);
                     Log.d("Order", order.activity.getName());
                     Log.d("Order", order.customer.getName());
 
                     customer.SaveCustomer(customer);
+                    databaseReference.child("Activities").child(order.activity.getActivityID()).child("AvailableTimes").child("Time1").child("AvailableTime").setValue(0);
                     Intent intent = new Intent(this, OrderView.class);
                     startActivity(intent);
                 }
@@ -124,7 +130,7 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
         }
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        Toast.makeText(getApplicationContext(),availableTimes.get(position) , Toast.LENGTH_LONG).show();
+        arg0.getItemAtPosition(position);
     }
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {

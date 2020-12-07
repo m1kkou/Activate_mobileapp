@@ -76,9 +76,15 @@ public class Services extends MainActivity{
         DataSnapshot Actds = dss.child("Activities");
         DataSnapshot ActivityDs = Actds.child(ActivityID);
         DataSnapshot AvailableDs = ActivityDs.child("AvailableTimes");
+
+        int Index = 0;
+
         for(DataSnapshot Timeds : AvailableDs.getChildren()){
             freeTimes.add(Timeds.getValue(BaseClasses.Time.class));
+            freeTimes.get(Index).setTimeID(Timeds.getKey());
+            Index += 1;
         }
+
         return freeTimes;
     }
 

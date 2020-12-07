@@ -1,13 +1,8 @@
 package school.project.activate_mobileapp;
 
-import android.provider.ContactsContract;
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class BaseClasses {
     public static ArrayList<BaseClasses.Activity> activities = MainActivity.activitylist;
@@ -68,35 +63,50 @@ class BaseClasses {
     }
 
     static class Time {
-        public String availableTime;
-        public String date;
-        public String interval;
+        public int AvailableTime;
+        public String Date;
+        public String Interval;
+
+
+
+
+
+        private String timeID;
         private int intervalStartTime;
         private int intervalEndTime;
 
         public Time(){}
 
         public Time (String date, String interval){
-            this.date = date;
-            this.interval = interval;
+            this.Date = date;
+            this.Interval = interval;
 
             String[] tempList = interval.split(":");
             this.intervalStartTime = Integer.parseInt(tempList[0]);
             this.intervalEndTime = Integer.parseInt(tempList[tempList.length - 1]);
-            this.availableTime = "1";
+            this.AvailableTime = 1;
 
         }
-        public void setTimeBooked(){ this.availableTime = "0"; }
-        public String getTime() {
-            return this.interval;
+        public void setTimeID(String ID){
+            this.timeID = ID;
         }
+
+        public void setTimeBooked(){ this.AvailableTime = 0; }
+        public String getTime() {
+            return this.Interval;
+        }
+        /*
         public String getDate() {
-            return this.date;
+            return this.Date;
+        }
+        */
+        public String getTimeID() {
+            return this.timeID;
         }
         public boolean isAvailable(){
-            if (this.availableTime.equals("1")){
+            if (this.AvailableTime == 1){
                 return true;
-            }
+                }
             return false;
         }
     }
