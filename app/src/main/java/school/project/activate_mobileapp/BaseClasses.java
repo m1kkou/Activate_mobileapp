@@ -22,15 +22,18 @@ class BaseClasses {
     static class Activity {
         private String Name;
         private String ActivityID;
-        private String Description; //Tästä voisi tehdä apuluokan
+        private String Description;
         private String ImageURL;
         private int IsAvailable; //0 = varattu/ei vapaa, 1 = vapaa
         private int Price;
         private String ActivityType;
+        private ArrayList<Time> availableTimes;
 
 
 
-        public Activity(){ }
+        public Activity(){
+            this.availableTimes = Services.getActivityTimes(this.getActivityID());
+        }
 
         public Activity(String activityID, String Name, String Description, String imageURL, String ActivityType, int isAvailable, int price ){
             this.ActivityID = activityID;
@@ -38,8 +41,8 @@ class BaseClasses {
             this.Description = Description;
             this.ImageURL = imageURL;
             this.ActivityType = ActivityType;
-            this.IsAvailable = isAvailable;
             this.Price = price;
+            this.availableTimes = Services.getActivityTimes(this.getActivityID());
         }
 
         public String getImageURL(){
@@ -57,6 +60,7 @@ class BaseClasses {
         public String getActivityID() {
             return String.valueOf(this.ActivityID);
         }
+        public ArrayList<Time> getAvailableTimes() { return availableTimes; }
 
         public void setActivityID(String ID) {
             ActivityID = ID;
@@ -73,18 +77,25 @@ class BaseClasses {
         public Time (String date, String interval){
             this.date = date;
             this.interval = interval;
+
             String[] tempList = interval.split(":");
             this.intervalStartTime = Integer.parseInt(tempList[0]);
             this.intervalEndTime = Integer.parseInt(tempList[tempList.length - 1]);
             this.availableTime = "1";
 
         }
-
+        public void setTimeBooked(){ this.availableTime = "0"; }
         public String getTime() {
             return this.interval;
         }
         public String getDate() {
             return this.date;
+        }
+        public boolean isAvailable(){
+            if (this.availableTime.equals("1")){
+                return true;
+            }
+            return false;
         }
     }
 

@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,11 +21,13 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 
-public class BookingView extends AppCompatActivity implements View.OnClickListener {
+public class BookingView extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     public static DatabaseReference databaseReference;
 
+    ArrayList<String> availableTimes = new ArrayList<>();
+
     BaseClasses.Activity activity = new BaseClasses.Activity();
-    TextView header;
+    TextView activityDescription;
 
     EditText editTextName;
     EditText editTextEmail;
@@ -34,18 +40,45 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             setContentView(R.layout.orderview);
 
             Intent intent = getIntent();
-
             activity = SearchResults.source.get(intent.getIntExtra("activityIndex", 0));
             Log.d("BookingView intent", Integer.toString(intent.getIntExtra("activityIndex", 0)));
 
+            availableTimes.add("testi");
+            Log.d("aTime", activity.getAvailableTimes().get(0).toString());
+
+            int j = 0;
+            for(int i = 0; i < activity.getAvailableTimes().size(); i+=1){
+                BaseClasses.Time t = activity.getAvailableTimes().get(i);
+                Log.d("availableTimesArray: ", "in for loop");
+                Log.d("availableTimesArray: ", t.getTime());
+                if(t.isAvailable()){
+                    availableTimes.add(t.getTime());
+                    Log.d("availableTimesArray: ", availableTimes.get(j).toString());
+                    j += 1;
+                }
+            }
+
+
             findViewById(R.id.button4).setOnClickListener(this);
             findViewById(R.id.button5).setOnClickListener(this);
-            header = (TextView) findViewById(R.id.textViewHeader);
+            activityDescription = (TextView) findViewById(R.id.textViewActivityDescription);
             editTextName = (EditText) findViewById(R.id.editTextName);
             editTextEmail = (EditText) findViewById(R.id.editTextEmail);
             editTextGSM = (EditText) findViewById(R.id.editTextGSM);
 
-            header.setText(activity.getName());
+            String descriptionText = activity.getName() + "\n\r" + activity.getDescription();
+
+            activityDescription.setText(descriptionText);
+
+            Spinner spin = (Spinner) findViewById(R.id.spinner);
+            spin.setOnItemSelectedListener(this);
+
+            //Creating the ArrayAdapter instance
+            //ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,availableTimes);
+            ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,availableTimes);
+            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //Setting the ArrayAdapter data on the Spinner
+            spin.setAdapter(aa);
         }
 
         public void onClick(View view) {
@@ -83,5 +116,13 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
 
             }
         }
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+        Toast.makeText(getApplicationContext(),availableTimes.get(position) , Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
 }
 

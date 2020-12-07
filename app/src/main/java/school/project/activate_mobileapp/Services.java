@@ -30,7 +30,7 @@ public class Services extends MainActivity{
         Log.d("test", activitylist.get(0).getActivityID());
         String activity0 = activitylist.get(0).getName() + " " + activitylist.get(0).getDescription();
         Log.d("test", String.valueOf(activitylist.size()));
-        Log.d("test", activity0);
+        Log.d("test", activitylist.get(0).getAvailableTimes().get(0).toString());
     }
     public static ArrayList<BaseClasses.Activity> getActivityDate(String Date){
         // getActivityDate (parempi nimi tälle xD) goes through every activity-node in datasnapshot
