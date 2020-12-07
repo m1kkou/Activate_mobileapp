@@ -67,12 +67,14 @@ class BaseClasses {
         }
     }
 
-    class Time {
-        private String availableTime;
-        private String date;
-        private String interval;
+    static class Time {
+        public String availableTime;
+        public String date;
+        public String interval;
         private int intervalStartTime;
         private int intervalEndTime;
+
+        public Time(){}
 
         public Time (String date, String interval){
             this.date = date;

@@ -42,8 +42,14 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             Intent intent = getIntent();
             activity = SearchResults.source.get(intent.getIntExtra("activityIndex", 0));
             Log.d("BookingView intent", Integer.toString(intent.getIntExtra("activityIndex", 0)));
+            String ActivityID = activity.getActivityID();
+            ArrayList<BaseClasses.Time> timeslist = Services.getActivityTimes(ActivityID);
+            for(BaseClasses.Time t : timeslist){
+                Log.d("testi", t.getTime());
+                availableTimes.add(t.getTime());
+            }
 
-            availableTimes.add("testi");
+            //availableTimes.add("testi");
             Log.d("aTime", activity.getAvailableTimes().get(0).toString());
 
             int j = 0;
