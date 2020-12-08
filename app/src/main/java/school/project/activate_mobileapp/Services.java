@@ -11,8 +11,6 @@ import java.util.ArrayList;
 public class Services extends MainActivity{
 
 
-    public static DataSnapshot dss = MainActivity.dataSnapshot;
-
     public static void getData(DataSnapshot datasnapshot){
         // getData saves all activity-nodes from datasnapshot to ArrayList "activitylist"
         // Value of each activity-node from firebase is saved as Activity.class
@@ -35,7 +33,7 @@ public class Services extends MainActivity{
         // getActivityDate (parempi nimi tälle xD) goes through every activity-node in datasnapshot
         // and saves activities in corresponding date to ArrayList DateActivityList (tälle parempi nimi kans)
         // To get access to times in each activity, you need to use variable ActivityID with method getActivityTimes
-        DataSnapshot ActivitiesSnap = dss.child("Activities");
+        DataSnapshot ActivitiesSnap = MainActivity.dataSnapshot.child("Activities");
         ArrayList<BaseClasses.Activity> DateActivityList = new ArrayList<>();
         int Index = 0;
         for(DataSnapshot ds : ActivitiesSnap.getChildren()){
@@ -52,37 +50,24 @@ public class Services extends MainActivity{
         }
         return DateActivityList;
     }
-/*
-    public static ArrayList<String> getActivityTimes(String ActivityID){
-        //getActivityTimes takes ActivityID as parameter, and uses it to find corresponding activity from DataSnapshot
-        //ActivityID is the same as key of each activity-node in firebase database
-        //Within given Activity, getActivityTimes loops through every Time-node, and saves Interval-values in ArrayList freeTimes
-        ArrayList<String> freeTimes = new ArrayList();
-        DataSnapshot Actds = dss.child("Activities");
-        DataSnapshot ActivityDs = Actds.child(ActivityID);
-        DataSnapshot AvailableDs = ActivityDs.child("AvailableTimes");
-        for(DataSnapshot Timeds : AvailableDs.getChildren()){
-            String Interval = Timeds.child("Interval").getValue().toString();
-            freeTimes.add(Interval);
-        }
-        return freeTimes;
-    }
-*/
+
     public static ArrayList<BaseClasses.Time> getActivityTimes(String ActivityID){
         //getActivityTimes takes ActivityID as parameter, and uses it to find corresponding activity from DataSnapshot
         //ActivityID is the same as key of each activity-node in firebase database
         //Within given Activity, getActivityTimes loops through every Time-node, and saves Interval-values in ArrayList freeTimes
         ArrayList<BaseClasses.Time> freeTimes = new ArrayList();
-        DataSnapshot Actds = dss.child("Activities");
+        DataSnapshot Actds = MainActivity.dataSnapshot.child("Activities");
         DataSnapshot ActivityDs = Actds.child(ActivityID);
         DataSnapshot AvailableDs = ActivityDs.child("AvailableTimes");
 
         int Index = 0;
 
         for(DataSnapshot Timeds : AvailableDs.getChildren()){
-            freeTimes.add(Timeds.getValue(BaseClasses.Time.class));
-            freeTimes.get(Index).setTimeID(Timeds.getKey());
-            Index += 1;
+            if(Timeds.child("Date").getValue().equals(SearchMenu.SelectedDate)){
+                freeTimes.add(Timeds.getValue(BaseClasses.Time.class));
+                freeTimes.get(Index).setTimeID(Timeds.getKey());
+                Index += 1;
+            }
         }
 
         return freeTimes;
@@ -92,13 +77,15 @@ public class Services extends MainActivity{
         if(filters.isEmpty()){
             return BaseClasses.activities;
         }
-        DataSnapshot ActivitiesSnapShot = dss.child("Activities");
+
+        DataSnapshot ActivitiesSnapShot = MainActivity.dataSnapshot.child("Activities");
         ArrayList<BaseClasses.Activity> filteredActivities = new ArrayList<>();
         int index = 0;
         for(DataSnapshot ds : ActivitiesSnapShot.getChildren()){
             String Filter = ds.child("ActivityType").getValue().toString();
             for(String filter : filters){
                 if(Filter.equals(filter)){
+                    Log.d("getFilteredActivities", ds.getValue().toString());
                     filteredActivities.add(ds.getValue(BaseClasses.Activity.class));
                     filteredActivities.get(index).setActivityID(ds.getKey());
                     index++;

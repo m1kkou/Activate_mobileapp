@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class SearchResults extends AppCompatActivity implements ListItemClickListener {
     RecyclerView recyclerView;
+    ArrayList<BaseClasses.Activity> source_date;
     public static ArrayList<BaseClasses.Activity> source;
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     Adapter adapter;

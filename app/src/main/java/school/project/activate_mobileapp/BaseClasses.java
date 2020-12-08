@@ -37,7 +37,7 @@ class BaseClasses {
             this.ImageURL = imageURL;
             this.ActivityType = ActivityType;
             this.Price = price;
-            this.availableTimes = Services.getActivityTimes(this.getActivityID());
+         //   this.availableTimes = Services.getActivityTimes(this.getActivityID());
         }
 
         public String getImageURL(){
@@ -126,28 +126,8 @@ class BaseClasses {
             this.GSM = GSM;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public void setGSM(String GSM) {
-            this.GSM = GSM;
-        }
-
         public String getName() {
             return name;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public String getGSM() {
-            return GSM;
         }
 
         public String getCustomerID() {

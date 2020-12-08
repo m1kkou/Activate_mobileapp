@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference = FirebaseDatabase.getInstance().getReference();
                 dataSnapshot = snapshot;
                 Services.getData(dataSnapshot);
                 Log.d("test", "database saved in snapshot");

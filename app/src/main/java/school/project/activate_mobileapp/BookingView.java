@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -22,7 +23,9 @@ import java.util.ArrayList;
 
 
 public class BookingView extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    public static DatabaseReference databaseReference;
+    public static DatabaseReference databaseReference = MainActivity.databaseReference;
+    public static String TimeID;
+    public static String ChosenTime;
 
     ArrayList<String> availableTimes = new ArrayList<>();
 
@@ -47,15 +50,20 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             String ActivityID = activity.getActivityID();
             Log.d("testi", ActivityID);
             ArrayList<BaseClasses.Time> timeslist = Services.getActivityTimes(ActivityID);
+            availableTimes.clear();
+            availableActivity.clear();
             for(BaseClasses.Time t : timeslist){
-                availableTimes.add(t.getTime());
+                if(t.isAvailable()){
+                    availableTimes.add(t.getTime());
+                    availableActivity.add(t);
+                }
             }
             Log.d("testi", timeslist.toString());
 
             //availableTimes.add("testi");
             Log.d("testi", Integer.toString(timeslist.size()));
 
-            int j = 0;
+         /*   int j = 0;
             for(int i = 0; i < activity.getAvailableTimes().size(); i+=1){
                 BaseClasses.Time t = activity.getAvailableTimes().get(i);
                 Log.d("availableTimesArray: ", "in for loop");
@@ -66,7 +74,7 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
                     Log.d("availableTimesArray: ", availableTimes.get(j).toString());
                     j += 1;
                 }
-            }
+            }*/
 
 
             findViewById(R.id.button4).setOnClickListener(this);
@@ -120,17 +128,18 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
                     Log.d("Order", order.customer.getName());
 
                     customer.SaveCustomer(customer);
-                    databaseReference.child("Activities").child(order.activity.getActivityID()).child("AvailableTimes").child("Time1").child("AvailableTime").setValue(0);
+                    databaseReference.child("Activities").child(order.activity.getActivityID()).child("AvailableTimes").child(TimeID).child("AvailableTime").setValue(0);
                     Intent intent = new Intent(this, OrderView.class);
                     startActivity(intent);
                 }
-
-
             }
         }
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        arg0.getItemAtPosition(position);
+        ChosenTime = arg0.getItemAtPosition(position).toString();
+        Log.d("testi", arg0.getItemAtPosition(position).toString());
+        Log.d("testi", availableActivity.toString());
+        TimeID = availableActivity.get(position).getTimeID();
     }
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
