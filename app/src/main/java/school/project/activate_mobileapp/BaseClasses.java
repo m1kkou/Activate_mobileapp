@@ -2,6 +2,7 @@ package school.project.activate_mobileapp;
 
 import com.google.firebase.database.DatabaseReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 class BaseClasses {
@@ -146,20 +147,23 @@ class BaseClasses {
         }
     }
 
-    static class Order {
+    static class Order implements Serializable {
         public Activity activity;
         public Customer customer;
+        public Time time;
 
         public Order(){
             this.activity = new Activity();
             this.customer = new Customer();
         }
 
-        public Order(Activity a,Customer c){
+        public Order(Activity a,Customer c,Time t){
             this.activity = a;
             this.customer = c;
+            this.time = t;
 
         }
+
 
         public void setActivityForOrder(Activity a){
             this.activity = a;

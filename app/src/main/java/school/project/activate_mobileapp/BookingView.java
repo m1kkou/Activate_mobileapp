@@ -10,14 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -26,11 +22,12 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
     public static DatabaseReference databaseReference = MainActivity.databaseReference;
     public static String TimeID;
     public static String ChosenTime;
+    public static BaseClasses.Time time;
 
-    ArrayList<String> availableTimes = new ArrayList<>();
+    ArrayList<String> timeslist = new ArrayList<>();
 
     BaseClasses.Activity activity = new BaseClasses.Activity();
-    ArrayList<BaseClasses.Time> availableActivity = new ArrayList<>();
+    ArrayList<BaseClasses.Time> availableTimes = new ArrayList<>();
 
     TextView activityDescription;
 
@@ -50,31 +47,18 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             String ActivityID = activity.getActivityID();
             Log.d("testi", ActivityID);
             ArrayList<BaseClasses.Time> timeslist = Services.getActivityTimes(ActivityID);
+            this.timeslist.clear();
             availableTimes.clear();
-            availableActivity.clear();
             for(BaseClasses.Time t : timeslist){
                 if(t.isAvailable()){
-                    availableTimes.add(t.getTime());
-                    availableActivity.add(t);
+                    this.timeslist.add(t.getTime());
+                    availableTimes.add(t);
                 }
             }
             Log.d("testi", timeslist.toString());
 
             //availableTimes.add("testi");
             Log.d("testi", Integer.toString(timeslist.size()));
-
-         /*   int j = 0;
-            for(int i = 0; i < activity.getAvailableTimes().size(); i+=1){
-                BaseClasses.Time t = activity.getAvailableTimes().get(i);
-                Log.d("availableTimesArray: ", "in for loop");
-                Log.d("availableTimesArray: ", t.getTime());
-                if(t.isAvailable()){
-                    availableTimes.add(t.getTime());
-                    availableActivity.add(t);
-                    Log.d("availableTimesArray: ", availableTimes.get(j).toString());
-                    j += 1;
-                }
-            }*/
 
 
             findViewById(R.id.button4).setOnClickListener(this);
@@ -93,7 +77,7 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
 
             //Creating the ArrayAdapter instance
             //ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,availableTimes);
-            ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,availableTimes);
+            ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, this.timeslist);
             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             //Setting the ArrayAdapter data on the Spinner
             spin.setAdapter(aa);
@@ -123,13 +107,15 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
 
 
                     BaseClasses.Customer customer = new BaseClasses.Customer(name, email, GSM);
-                    BaseClasses.Order order = new BaseClasses.Order(activity, customer);
+                    BaseClasses.Order order = new BaseClasses.Order(activity, customer,time);
                     Log.d("Order", order.activity.getName());
                     Log.d("Order", order.customer.getName());
 
                     customer.SaveCustomer(customer);
                     databaseReference.child("Activities").child(order.activity.getActivityID()).child("AvailableTimes").child(TimeID).child("AvailableTime").setValue(0);
+                    String windowtext = "Varaamasi aktiviteetti: " + order.activity.getName() + "\n\r" + order.time.Date + "\n\r" + order.time.getTime();
                     Intent intent = new Intent(this, OrderView.class);
+                    intent.putExtra("Order", windowtext);
                     startActivity(intent);
                 }
             }
@@ -138,8 +124,9 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
         ChosenTime = arg0.getItemAtPosition(position).toString();
         Log.d("testi", arg0.getItemAtPosition(position).toString());
-        Log.d("testi", availableActivity.toString());
-        TimeID = availableActivity.get(position).getTimeID();
+        Log.d("testi", availableTimes.toString());
+        TimeID = availableTimes.get(position).getTimeID();
+        time = availableTimes.get(position);
     }
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
