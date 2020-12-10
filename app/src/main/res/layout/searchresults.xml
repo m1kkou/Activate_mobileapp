@@ -6,8 +6,8 @@
     android:id="@+id/relativelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#275960"
-    android:backgroundTint="#275960"
+    android:background="#026B78"
+    android:backgroundTint="#026B78"
     tools:context="school.project.activate_mobileapp.SearchResults">
 
     <!--Recycler View widget-->

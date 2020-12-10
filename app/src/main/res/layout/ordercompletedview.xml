@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#275960">
+    android:background="#026B78">
 
     <Button
         android:id="@+id/button6"
@@ -24,10 +24,14 @@
 
     <TextView
         android:id="@+id/textboxordercompleted"
-        android:layout_width="208dp"
-        android:layout_height="186dp"
+        android:layout_width="340dp"
+        android:layout_height="509dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Olet varannut xxxxxxxx.."
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

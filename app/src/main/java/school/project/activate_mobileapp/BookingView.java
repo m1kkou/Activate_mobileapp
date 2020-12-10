@@ -113,7 +113,8 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
 
                     customer.SaveCustomer(customer);
                     databaseReference.child("Activities").child(order.activity.getActivityID()).child("AvailableTimes").child(TimeID).child("AvailableTime").setValue(0);
-                    String windowtext = "Varaamasi aktiviteetti: " + order.activity.getName() + "\n\r" + order.time.Date + "\n\r" + order.time.getTime();
+                    String windowtext = "Kiitos varauksesta!" + "\n\r"+ "\n\r" + "Varaamasi aktiviteetti: " + order.activity.getName() + "\n\r"
+                            + "Päivämäärä: " + order.time.Date + "\n\r" + "Aika: " + order.time.getTime() + "\n\r"+ "\n\r"+ "\n\r" +"Varausvahvistus on lähetetty sähköpostiisi, maksa varaus paikanpäällä. Kiitos, että asioit meidän kauttamme."+ "\n\r" + "\n\r"+ "\n\r"+"Activaten henkilökunta toivottaa nautinnollisia hetkiä aktiviteettien parissa!";
                     Intent intent = new Intent(this, OrderView.class);
                     intent.putExtra("Order", windowtext);
                     startActivity(intent);
