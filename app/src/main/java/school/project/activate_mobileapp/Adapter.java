@@ -106,7 +106,7 @@ import java.util.List;
             holder.imageView.setImageBitmap(getBitmapFromURL(list.get(position).getImageURL()));
             holder.headerTextView.setText(list.get(position).getName());
             holder.descriptionTextView.setText(list.get(position).getDescription());
-            holder.priceTextView.setText(list.get(position).getPrice());
+            holder.priceTextView.setText(list.get(position).getPrice()+ " €");
 
 
         }
