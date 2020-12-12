@@ -26,8 +26,6 @@ class BaseClasses {
 
         //Activity uses an empty constructor so Firebase methods can
         //directly cast json -objects to this type
-        //Note! in the constructor we call getActivityTimes to get a list of
-        //time objects to the parent Activity object.
         public Activity(){
             this.availableTimes = Services.getActivityTimes(this.getActivityID());
         }
@@ -100,9 +98,6 @@ class BaseClasses {
         public void setTimeBooked(){ this.AvailableTime = 0; }
         public String getTime() {
             return this.Interval;
-        }
-        public String getDate() {
-            return this.Date;
         }
         public String getTimeID() {
             return this.timeID;
