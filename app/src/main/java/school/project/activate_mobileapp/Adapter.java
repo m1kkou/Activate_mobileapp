@@ -27,10 +27,6 @@ import java.util.List;
         final private ListItemClickListener mOnClickListener;
         // List with Activity type
         private List<BaseClasses.Activity> list;
-
-
-
-
         // View Holder class which
         // extends RecyclerView.ViewHolder
         public class ActivityView extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -71,7 +67,7 @@ import java.util.List;
         }
 
         // Constructor for adapter class
-        // which takes a list of String type
+        // which takes a list of Activities
         public Adapter(List<BaseClasses.Activity> horizontalList, ListItemClickListener onClickListener) {
             this.list = horizontalList;
             this.mOnClickListener = onClickListener;

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,7 +29,7 @@ public class SearchResults extends AppCompatActivity implements ListItemClickLis
 
         setContentView(R.layout.searchresults);
 
-        source = Services.getFilteredActivities(SearchMenu.filteredlist);
+        source = Services.getFilteredActivities(SearchMenu.filteredList);
 
         recyclerView
                 = (RecyclerView)findViewById(

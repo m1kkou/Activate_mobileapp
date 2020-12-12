@@ -19,18 +19,19 @@ import java.util.ArrayList;
 
 
 public class BookingView extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+    //Static props from other classes:
     public static DatabaseReference databaseReference = MainActivity.databaseReference;
     public static String TimeID;
     public static String ChosenTime;
     public static BaseClasses.Time time;
 
-    ArrayList<String> timeslist = new ArrayList<>();
-
+    //Different lists:
+    ArrayList<String> strTimesList = new ArrayList<>();
     BaseClasses.Activity activity = new BaseClasses.Activity();
     ArrayList<BaseClasses.Time> availableTimes = new ArrayList<>();
 
+    //UI components:
     TextView activityDescription;
-
     EditText editTextName;
     EditText editTextEmail;
     EditText editTextGSM;
@@ -41,26 +42,25 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             super.onCreate(savedInstanceState);
             setContentView(R.layout.orderview);
 
+            //Getting data from the SearchResults -class:
             Intent intent = getIntent();
+            //Index value of the chosen activity
             activity = SearchResults.source.get(intent.getIntExtra("activityIndex", 0));
-            Log.d("BookingView intent", Integer.toString(intent.getIntExtra("activityIndex", 0)));
             String ActivityID = activity.getActivityID();
-            Log.d("testi", ActivityID);
-            ArrayList<BaseClasses.Time> timeslist = Services.getActivityTimes(ActivityID);
-            this.timeslist.clear();
+
+            //Services method used to return the chosen Activity objects available times:
+            ArrayList<BaseClasses.Time> oTimesList = Services.getActivityTimes(ActivityID);
+            this.strTimesList.clear();
             availableTimes.clear();
-            for(BaseClasses.Time t : timeslist){
+
+            for(BaseClasses.Time t : oTimesList){
                 if(t.isAvailable()){
-                    this.timeslist.add(t.getTime());
+                    this.strTimesList.add(t.getTime());
                     availableTimes.add(t);
                 }
             }
-            Log.d("testi", timeslist.toString());
 
-            //availableTimes.add("testi");
-            Log.d("testi", Integer.toString(timeslist.size()));
-
-
+            //Set UI components:
             findViewById(R.id.button4).setOnClickListener(this);
             findViewById(R.id.button5).setOnClickListener(this);
             activityDescription = (TextView) findViewById(R.id.textViewActivityDescription);
@@ -69,15 +69,14 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
             editTextGSM = (EditText) findViewById(R.id.editTextGSM);
 
             String descriptionText = activity.getName() + "\n\r" + activity.getDescription();
-
             activityDescription.setText(descriptionText);
 
+            //Spinner object to show available time intervals:
             Spinner spin = (Spinner) findViewById(R.id.spinner);
             spin.setOnItemSelectedListener(this);
 
-            //Creating the ArrayAdapter instance
-            //ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,availableTimes);
-            ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, this.timeslist);
+            //Array adapter to hold the time values shown in the spinner
+            ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, this.strTimesList);
             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             //Setting the ArrayAdapter data on the Spinner
             spin.setAdapter(aa);
@@ -87,7 +86,7 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
 
 
             Button button;
-
+            //Return to search results
             if (view instanceof Button) {
                 button = (Button) view;
                 if (button.getId() == R.id.button4) {
@@ -96,7 +95,7 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
                 }
 
             }
-
+            //Complete the order
             if (view instanceof Button) {
                 button = (Button) view;
                 if (button.getId() == R.id.button5) {
@@ -104,34 +103,48 @@ public class BookingView extends AppCompatActivity implements View.OnClickListen
                     String email = editTextEmail.getText().toString();
                     String GSM = editTextGSM.getText().toString();
 
-
-
+                    //Initiate new customer object
                     BaseClasses.Customer customer = new BaseClasses.Customer(name, email, GSM);
+                    //Initiate new order object that holds Activity, Customer and Time -objects
                     BaseClasses.Order order = new BaseClasses.Order(activity, customer,time);
-                    Log.d("Order", order.activity.getName());
-                    Log.d("Order", order.customer.getName());
-
+                    //Save customer info:
                     customer.SaveCustomer(customer);
+
+                    //Set availabletime value to 0 in db so the chosen time
+                    // is not shown in the search results after it is ordered
                     databaseReference.child("Activities").child(order.activity.getActivityID()).child("AvailableTimes").child(TimeID).child("AvailableTime").setValue(0);
-                    String windowtext = "Kiitos varauksesta!" + "\n\r"+ "\n\r" + "Varaamasi aktiviteetti: " + order.activity.getName() + "\n\r"
-                            + "Päivämäärä: " + order.time.Date + "\n\r" + "Aika: " + order.time.getTime() + "\n\r"+ "\n\r"+ "\n\r" +"Varausvahvistus on lähetetty sähköpostiisi, maksa varaus paikanpäällä. Kiitos, että asioit meidän kauttamme."+ "\n\r" + "\n\r"+ "\n\r"+"Activaten henkilökunta toivottaa nautinnollisia hetkiä aktiviteettien parissa!";
+
+                    //Message shown in the ordercompletedview
+                    String windowtext =
+                            "Kiitos varauksesta!" + "\n\r"+ "\n\r" +
+                            "Varaamasi aktiviteetti: " + order.activity.getName() + "\n\r"
+                            + "Päivämäärä: " + order.time.Date + "\n\r" + "Aika: " + order.time.getTime()
+                            + "\n\r"+ "\n\r"+ "\n\r" +"Varausvahvistus on lähetetty sähköpostiisi, maksa " +
+                            "varaus paikanpäällä. Kiitos, että asioit meidän kauttamme."+ "\n\r" + "\n\r"+ "\n\r"
+                            +"Activaten henkilökunta toivottaa nautinnollisia hetkiä aktiviteettien parissa!";
+
+                    //Intent to ordercompletedview/OrderView class
                     Intent intent = new Intent(this, OrderView.class);
+                    //Set the windowtext as an extra for exporting it to the next class
                     intent.putExtra("Order", windowtext);
                     startActivity(intent);
                 }
             }
         }
+
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+        //SAVE the data chosen from the Spinner
         ChosenTime = arg0.getItemAtPosition(position).toString();
-        Log.d("testi", arg0.getItemAtPosition(position).toString());
-        Log.d("testi", availableTimes.toString());
         TimeID = availableTimes.get(position).getTimeID();
         time = availableTimes.get(position);
     }
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
+        //IF nothing is selected take the first element
+        ChosenTime = arg0.getItemAtPosition(0).toString();
+        TimeID = availableTimes.get(0).getTimeID();
+        time = availableTimes.get(0);
     }
 }
 

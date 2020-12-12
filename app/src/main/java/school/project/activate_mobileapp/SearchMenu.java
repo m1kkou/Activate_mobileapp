@@ -16,21 +16,23 @@ import java.util.ArrayList;
 
 public class SearchMenu extends AppCompatActivity implements View.OnClickListener{
 
+    //UI components
     CheckBox checkBox3, checkBox8, checkBox7, checkBox9, checkBox11; //liikunta3, Hyvinvointi8, Kulttuuri7, Elamys9, Muu11
     EditText editTextDate;
-    public static DatabaseReference databaseReference;
-    public static ArrayList<BaseClasses.Activity> activitylist = new ArrayList<>();
-    //Button button;
 
-    ArrayList<BaseClasses.Activity> listWithAllActivities;
-    public static ArrayList<String> filteredlist = new ArrayList<>();
+    //Static props so can be reached within other classes
+    public static DatabaseReference databaseReference;
+    public static ArrayList<String> filteredList = new ArrayList<>();
     public static String SelectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.searchmenu);
+        //get database instance
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        //Initiate UI components
         checkBox3 = findViewById(R.id.checkBox3); //liikunta
         checkBox8 = findViewById(R.id.checkBox8); //Hyvinvointi
         checkBox7 = findViewById(R.id.checkBox7); //Kulttuuri
@@ -42,33 +44,31 @@ public class SearchMenu extends AppCompatActivity implements View.OnClickListene
 
             public void onClick(View view) {
                 Button button;
-                filteredlist.clear();
+                filteredList.clear();
                 SelectedDate = editTextDate.getText().toString();
-             if (view instanceof Button) {
-                button = (Button) view;
-                 if (button.getId() == R.id.button){
+                if (view instanceof Button) {
+                    button = (Button) view;
+
+                if (button.getId() == R.id.button){
                      Intent intent = new Intent(this, SearchResults.class);
 
+                //Collect chosen filters from if blocks
                 if (checkBox3.isChecked()) {
-                    filteredlist.add("Liikunta");
+                    filteredList.add("Liikunta");
                 }
                 if (checkBox8.isChecked()) {
-                    filteredlist.add("Hyvinvointi");
-
+                    filteredList.add("Hyvinvointi");
                 }
                 if (checkBox7.isChecked()) {
-                    filteredlist.add("Kulttuuri");
-
+                    filteredList.add("Kulttuuri");
                 }
                 if (checkBox9.isChecked()) {
-                    filteredlist.add("Elamys");
-
+                    filteredList.add("Elamys");
                 }
                 if (checkBox11.isChecked()) {
-                    filteredlist.add("Muu");
-
+                    filteredList.add("Muu");
                 }
-                    startActivity(intent);
+                startActivity(intent);
                 }
             }
         }

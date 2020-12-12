@@ -9,6 +9,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+//This is not used, but it's a work in progress since it gives
+//more flexibility for loading the Activity images
+//Holds async tasks to perform the image downloading in an
+//async thread there for not blocking other operations
+
 public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
 
     private String url;

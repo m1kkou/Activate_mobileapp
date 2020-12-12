@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String aPrice = a.getPrice();
                     String aName = a.getName();
                     String activity0 = aName + " " + aDesc + " " + aPrice + ",00";
-                    Log.d("test", activity0);
                 }
                 Intent intent = new Intent(this, SearchMenu.class);
                 startActivity(intent);
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 databaseReference = FirebaseDatabase.getInstance().getReference();
                 dataSnapshot = snapshot;
                 Services.getData(dataSnapshot);
-                Log.d("test", "database saved in snapshot");
             }
 
             @Override
